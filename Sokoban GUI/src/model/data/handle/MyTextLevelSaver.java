@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
-import model.data.Level;
+import commons.Level;
 import model.data.SokoElements.Box;
 import model.data.SokoElements.Player;
 import model.data.SokoElements.movable;

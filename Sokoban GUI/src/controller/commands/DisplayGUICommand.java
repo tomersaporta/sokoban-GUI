@@ -1,8 +1,7 @@
 package controller.commands;
 
-import controller.SokobanController;
 
-public class DisplayGUICommand implements SokobanCommand {
+public class DisplayGUICommand extends Command {
 
 	@Override
 	public void exceute() {
@@ -10,10 +9,5 @@ public class DisplayGUICommand implements SokobanCommand {
 
 	}
 
-	@Override
-	public void setParams(SokobanController sokoController, String input) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

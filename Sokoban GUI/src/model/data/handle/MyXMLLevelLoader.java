@@ -5,7 +5,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import model.data.Level;
+import commons.Level;
 /**
  *<h1>Object Level Loader</h1> 
  *create new level using XML file

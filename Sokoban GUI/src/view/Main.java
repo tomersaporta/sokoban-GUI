@@ -14,7 +14,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-			Scene scene = new Scene(root,400,400);
+			Scene scene = new Scene(root,600,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -24,12 +24,13 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
+		//launch(args);
 		
 		/**
 		 * create the connection between the Model View Controller
 		 */
-		MyView ui=new MyView();
+		//MyView ui=new MyView();
+		CLIView ui=new CLIView();
 		MyModel model=new MyModel();
 		//server
 		
@@ -38,5 +39,8 @@ public class Main extends Application {
 		ui.addObserver(theController);
 		model.addObserver(theController);
 		//server-observable
+		
+		ui.start();
+		
 	}
 }

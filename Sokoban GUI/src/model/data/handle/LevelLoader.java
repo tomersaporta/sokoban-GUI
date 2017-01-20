@@ -3,7 +3,7 @@ package model.data.handle;
 import java.io.IOException;
 import java.io.InputStream;
 
-import model.data.Level;
+import commons.Level;
 
 /**
  * <h1>Level Saver interface</h1>

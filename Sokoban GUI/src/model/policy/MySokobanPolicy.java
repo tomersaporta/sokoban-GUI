@@ -1,6 +1,6 @@
 package model.policy;
 
-import model.data.Level;
+import commons.Level;
 import model.data.SokoElements.Box;
 import model.data.SokoElements.Floor;
 import model.data.SokoElements.GeneralElement;

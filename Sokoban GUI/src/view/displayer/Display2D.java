@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
-import model.data.Level;
+import commons.Level;
 import model.data.SokoElements.Box;
 import model.data.SokoElements.Player;
 import model.data.SokoElements.movable;
@@ -25,15 +25,11 @@ public class Display2D implements display {
 		
 		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(output));
 		
+		char[][] levelBored=myLevel.getLevelBored();
 		//Scanning the two arrays of level and prints to representer of each sokobanEntity
 		for(int i=0;i<myLevel.getRow() ;i++){
 			for (int j=0;j<myLevel.getCol();j++){
-				movable m = myLevel.getMovearr()[i][j];
-				if(m instanceof Player || m instanceof Box)
-					out.write(m.getType());
-				else
-					out.write(myLevel.getBackground()[i][j].getType());
-				
+				out.write(levelBored[i][j]);
 			}
 			if (i == myLevel.getRow() - 1)
 			{

@@ -1,6 +1,5 @@
 package controller.commands;
 
-import controller.SokobanController;
 import model.IModel;
 
 /**
@@ -8,27 +7,13 @@ import model.IModel;
  * activate the move in the model
  */
 
-public class MoveCommand implements SokobanCommand {
+public class MoveCommand extends Command {
 	
-	private String moveInput;
 	private IModel model;
 	
-	public MoveCommand() {
-		
-		this.moveInput=null;
-		this.model=null;
+	public MoveCommand(IModel model) {
+		this.model=model;
 	}
-	
-
-	public String getMoveInput() {
-		return moveInput;
-	}
-
-
-	public void setMoveInput(String moveInput) {
-		this.moveInput = moveInput;
-	}
-
 
 	public IModel getModel() {
 		return model;
@@ -44,16 +29,8 @@ public class MoveCommand implements SokobanCommand {
 	 */
 	@Override
 	public void exceute() {
-		this.model.move(this.moveInput);
+		this.model.move(getParams());
 	}
 	
-	/**
-	 * Initialize the parameters necessary for the exceute
-	 */
-	@Override
-	public void setParams(SokobanController sokoController, String input) {
-		setModel(sokoController.getModel());
-		setMoveInput(input);
-	}
 
 }

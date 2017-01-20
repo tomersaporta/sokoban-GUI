@@ -3,7 +3,7 @@ package view.displayer;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import model.data.Level;
+import commons.Level;
 
 /**
  * <h1>display interface</h1>

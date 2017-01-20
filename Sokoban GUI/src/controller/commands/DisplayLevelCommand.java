@@ -1,20 +1,19 @@
 package controller.commands;
 
+
 import java.io.IOException;
 
-import controller.SokobanController;
-import model.data.Level;
-import view.displayer.Display2D;
-import view.displayer.display;
+import model.IModel;
+import view.IView;
 
-public class DisplayLevelCommand implements SokobanCommand {
+public class DisplayLevelCommand extends Command {
 
-	display displayer;
-	Level level;
+	private IModel model;
+	private IView view;
 	
-	public DisplayLevelCommand() {
-		this.displayer=null;
-		this.level=null;
+	public DisplayLevelCommand(IModel model, IView view) {
+		this.model= model;
+		this.view= view;
 	}
 	
 	/**
@@ -23,27 +22,12 @@ public class DisplayLevelCommand implements SokobanCommand {
 	@Override
 	public void exceute() {
 		try {
-			this.displayer.displayLevel(level, System.out);
+			this.view.displayLevel(this.model.getCurrentLevel(), System.out);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	/**
-	 * Initialize the parameters necessary for the receiver
-	 * @param level display this level
-	 */
-	public void init (Level level){
-		this.displayer= new Display2D();
-		this.level= level;
-		
-		
-	}
-
-	@Override
-	public void setParams(SokobanController sokoController, String input) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

@@ -1,6 +1,6 @@
 package model;
 
-import model.data.Level;
+import commons.Level;
 
 public interface IModel {
 	

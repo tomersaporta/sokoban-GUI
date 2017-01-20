@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import model.data.Level;
+import commons.Level;
 import model.data.SokoElements.ElementMovableFactory;
 import model.data.SokoElements.ElementUnmovableFactory;
 import model.data.SokoElements.Player;

@@ -2,12 +2,11 @@ package controller.commands;
 
 import java.io.IOException;
 
-import controller.SokobanController;
 /**
  *<h1>Exit Level Command</h1> 
  *close all the files, release resources
  */
-public class ExitCommand implements SokobanCommand {
+public class ExitCommand implements ICommand {
 
 	public ExitCommand() {
 		
@@ -32,10 +31,13 @@ public class ExitCommand implements SokobanCommand {
 	}
 
 	@Override
-	public void setParams(SokobanController sokoController, String input) {
+	public void setParams(String input) {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
 	
 
 

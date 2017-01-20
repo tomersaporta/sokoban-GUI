@@ -4,10 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Observable;
 
-import model.data.Level;
+import commons.Level;
 import model.data.handle.LevelLoader;
 import model.data.handle.LevelLoaderFactory;
 import model.data.handle.LevelSaver;
@@ -53,11 +52,13 @@ public class MyModel extends Observable implements IModel {
 		//if (levelLoader==null)
 		//throw new IOException("Invalid Input, Try Again");
 		
+
 		Thread t= new Thread(new Runnable() {	
 			@Override
 			public void run() {
 				try {
 					setTheLevel(levelLoader.loadLevel(new FileInputStream(new File(filepath))));
+					System.out.println("level loaded");
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -66,6 +67,13 @@ public class MyModel extends Observable implements IModel {
 		});
 		t.start();
 		
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		setChanged();
 		notifyObservers("changed");
 	}
 
@@ -104,7 +112,7 @@ public class MyModel extends Observable implements IModel {
 			//throw new IOException("Invalid command");
 		
 		policy.checkPolicy(this.theLevel.getListPlayer().get(0), moveType);
-		
+		setChanged();
 		notifyObservers("changed");
 	}
 }

@@ -1,4 +1,4 @@
-package model.data;
+package commons;
 
 import java.util.ArrayList;
 
@@ -295,5 +295,16 @@ public class Level{
 		
 	}
 	
+	
+	public char[][] getLevelBored(){
+		
+		char[][]result=new char[getRow()][getCol()];
+		for(int i=0;i<getRow();i++)
+			for(int j=0;j<getCol();j++)
+				result[i][j]=getElementInPosition(new Position(i, j)).getType();
+		
+		return result;
+				
+	}
 	
 }

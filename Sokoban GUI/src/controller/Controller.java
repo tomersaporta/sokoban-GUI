@@ -1,7 +1,8 @@
 package controller;
 
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import controller.commands.ICommand;
 
@@ -11,7 +12,7 @@ public class Controller {
 	private boolean stop;
 	
 	public Controller() {
-		this.commandsQueue=new LinkedBlockingQueue<ICommand>();
+		this.commandsQueue=new ArrayBlockingQueue<ICommand>(20);
 		this.stop=false;
 	}
 	
@@ -36,8 +37,9 @@ public class Controller {
 				while(!stop){
 					ICommand command;
 					try {
-						command = getCommandsQueue().take();
-						command.exceute();
+						command = getCommandsQueue().poll(1, TimeUnit.SECONDS);
+						if(command!=null)
+							command.exceute();
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

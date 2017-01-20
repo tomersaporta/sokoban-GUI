@@ -1,6 +1,6 @@
 package model.policy;
 
-import model.data.Level;
+import commons.Level;
 /**
  *<h1> General Sokoban Policy</h1>
  *defines the common data of all Sokoban's Policies
