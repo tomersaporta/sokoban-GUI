@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import view.SokobanDisplayer?>
 
 <BorderPane prefHeight="508.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
    <top>
@@ -19,7 +20,7 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open Level" />
-                  <MenuItem mnemonicParsing="false" text="Save Level" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveFile" text="Save Level" />
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
@@ -39,9 +40,9 @@
       </HBox>
    </bottom>
    <center>
-      <Canvas height="440.0" width="440.0" BorderPane.alignment="CENTER" />
+      <SokobanDisplayer fx:id="sokobanDisplayer" height="440.0" width="440.0" BorderPane.alignment="CENTER" wallFileName="./resources/elements/wall.jpg" boxFileName="./resources/elements/Box.png" targetFileName="./resources/elements/Target.jpg" playerFileName="./resources/elements/Player.jpg" backgrounFileName="./resources/elements/background.jpg" />
    </center>
-   <right>
+   <left>
       <VBox prefHeight="466.0" prefWidth="161.0" BorderPane.alignment="CENTER">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
@@ -63,7 +64,7 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <VBox.margin>
-                  <Insets top="200.0" />
+                  <Insets top="120.0" />
                </VBox.margin>
                <children>
                   <Label prefHeight="30.0" prefWidth="61.0" text="Time:">
@@ -88,5 +89,5 @@
             </VBox>
          </children>
       </VBox>
-   </right>
+   </left>
 </BorderPane>
