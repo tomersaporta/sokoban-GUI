@@ -197,10 +197,7 @@ public class Level{
 		return this.listPlayer.size();
 	}
 
-	@Override
-	public String toString() {
-		return this.listBox.toString();
-	}
+
 
 	/**
 	 * return the number of boxes on target

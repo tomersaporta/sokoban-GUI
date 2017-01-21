@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_111" class="java.beans.XMLDecoder">
+ <object class="commons.Level" id="Level0">
+  <void property="background">
+   <array class="[Lmodel.data.SokoElements.unmovable;" length="7">
+    <void index="0">
+     <array class="model.data.SokoElements.unmovable" length="7">
+      <void index="0">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position"/>
+        </void>
+       </object>
+      </void>
+      <void index="1">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="y">
+           <int>1</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="2">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="y">
+           <int>2</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="3">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="y">
+           <int>3</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="4">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="y">
+           <int>4</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="5">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="y">
+           <int>5</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="6">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="y">
+           <int>6</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+     </array>
+    </void>
+    <void index="1">
+     <array class="model.data.SokoElements.unmovable" length="7">
+      <void index="0">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>1</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="1">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>1</int>
+          </void>
+          <void property="y">
+           <int>1</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="2">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>1</int>
+          </void>
+          <void property="y">
+           <int>2</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="3">
+       <object class="model.data.SokoElements.Target" id="Target0">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>1</int>
+          </void>
+          <void property="y">
+           <int>3</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="4">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>1</int>
+          </void>
+          <void property="y">
+           <int>4</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="5">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>1</int>
+          </void>
+          <void property="y">
+           <int>5</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="6">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>1</int>
+          </void>
+          <void property="y">
+           <int>6</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+     </array>
+    </void>
+    <void index="2">
+     <array class="model.data.SokoElements.unmovable" length="7">
+      <void index="0">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>2</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="1">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>2</int>
+          </void>
+          <void property="y">
+           <int>1</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="2">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>2</int>
+          </void>
+          <void property="y">
+           <int>2</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="3">
+       <object class="model.data.SokoElements.Floor"/>
+      </void>
+      <void index="4">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>2</int>
+          </void>
+          <void property="y">
+           <int>4</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="5">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>2</int>
+          </void>
+          <void property="y">
+           <int>5</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="6">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>2</int>
+          </void>
+          <void property="y">
+           <int>6</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+     </array>
+    </void>
+    <void index="3">
+     <array class="model.data.SokoElements.unmovable" length="7">
+      <void index="0">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>3</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="1">
+       <object class="model.data.SokoElements.Target" id="Target1">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>3</int>
+          </void>
+          <void property="y">
+           <int>1</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="2">
+       <object class="model.data.SokoElements.Floor"/>
+      </void>
+      <void index="3">
+       <object class="model.data.SokoElements.Floor"/>
+      </void>
+      <void index="4">
+       <object class="model.data.SokoElements.Floor"/>
+      </void>
+      <void index="5">
+       <object class="model.data.SokoElements.Target" id="Target2">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>3</int>
+          </void>
+          <void property="y">
+           <int>5</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="6">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>3</int>
+          </void>
+          <void property="y">
+           <int>6</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+     </array>
+    </void>
+    <void index="4">
+     <array class="model.data.SokoElements.unmovable" length="7">
+      <void index="0">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>4</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="1">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>4</int>
+          </void>
+          <void property="y">
+           <int>1</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="2">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>4</int>
+          </void>
+          <void property="y">
+           <int>2</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="3">
+       <object class="model.data.SokoElements.Floor"/>
+      </void>
+      <void index="4">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>4</int>
+          </void>
+          <void property="y">
+           <int>4</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="5">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>4</int>
+          </void>
+          <void property="y">
+           <int>5</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="6">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>4</int>
+          </void>
+          <void property="y">
+           <int>6</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+     </array>
+    </void>
+    <void index="5">
+     <array class="model.data.SokoElements.unmovable" length="7">
+      <void index="0">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>5</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="1">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>5</int>
+          </void>
+          <void property="y">
+           <int>1</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="2">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>5</int>
+          </void>
+          <void property="y">
+           <int>2</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="3">
+       <object class="model.data.SokoElements.Target" id="Target3">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>5</int>
+          </void>
+          <void property="y">
+           <int>3</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="4">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>5</int>
+          </void>
+          <void property="y">
+           <int>4</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="5">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>5</int>
+          </void>
+          <void property="y">
+           <int>5</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="6">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>5</int>
+          </void>
+          <void property="y">
+           <int>6</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+     </array>
+    </void>
+    <void index="6">
+     <array class="model.data.SokoElements.unmovable" length="7">
+      <void index="0">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>6</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="1">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>6</int>
+          </void>
+          <void property="y">
+           <int>1</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="2">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>6</int>
+          </void>
+          <void property="y">
+           <int>2</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="3">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>6</int>
+          </void>
+          <void property="y">
+           <int>3</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="4">
+       <object class="model.data.SokoElements.Wall">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>6</int>
+          </void>
+          <void property="y">
+           <int>4</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="5">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>6</int>
+          </void>
+          <void property="y">
+           <int>5</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void index="6">
+       <object class="model.data.SokoElements.Floor">
+        <void property="position">
+         <object class="model.data.SokoElements.Position">
+          <void property="x">
+           <int>6</int>
+          </void>
+          <void property="y">
+           <int>6</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+     </array>
+    </void>
+   </array>
+  </void>
+  <void property="col">
+   <int>7</int>
+  </void>
+  <void property="listBox">
+   <void method="add">
+    <object class="model.data.SokoElements.Box" id="Box0">
+     <void property="isOnTarget">
+      <boolean>true</boolean>
+     </void>
+     <void property="position">
+      <object class="model.data.SokoElements.Position">
+       <void property="x">
+        <int>1</int>
+       </void>
+       <void property="y">
+        <int>3</int>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="model.data.SokoElements.Box" id="Box1">
+     <void property="position">
+      <object class="model.data.SokoElements.Position">
+       <void property="x">
+        <int>3</int>
+       </void>
+       <void property="y">
+        <int>2</int>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="model.data.SokoElements.Box" id="Box2">
+     <void property="isOnTarget">
+      <boolean>true</boolean>
+     </void>
+     <void property="position">
+      <object class="model.data.SokoElements.Position">
+       <void property="x">
+        <int>3</int>
+       </void>
+       <void property="y">
+        <int>5</int>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="model.data.SokoElements.Box" id="Box3">
+     <void property="position">
+      <object class="model.data.SokoElements.Position">
+       <void property="x">
+        <int>4</int>
+       </void>
+       <void property="y">
+        <int>3</int>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="listPlayer">
+   <void method="add">
+    <object class="model.data.SokoElements.Player" id="Player0">
+     <void property="position">
+      <object class="model.data.SokoElements.Position">
+       <void property="x">
+        <int>3</int>
+       </void>
+       <void property="y">
+        <int>4</int>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="listTarget">
+   <void method="add">
+    <object idref="Target0"/>
+   </void>
+   <void method="add">
+    <object idref="Target1"/>
+   </void>
+   <void method="add">
+    <object idref="Target2"/>
+   </void>
+   <void method="add">
+    <object idref="Target3"/>
+   </void>
+  </void>
+  <void property="movearr">
+   <array class="[Lmodel.data.SokoElements.movable;" length="7">
+    <void index="0">
+     <array class="model.data.SokoElements.movable" length="7"/>
+    </void>
+    <void index="1">
+     <array class="model.data.SokoElements.movable" length="7">
+      <void index="3">
+       <object idref="Box0"/>
+      </void>
+     </array>
+    </void>
+    <void index="2">
+     <array class="model.data.SokoElements.movable" length="7"/>
+    </void>
+    <void index="3">
+     <array class="model.data.SokoElements.movable" length="7">
+      <void index="2">
+       <object idref="Box1"/>
+      </void>
+      <void index="4">
+       <object idref="Player0"/>
+      </void>
+      <void index="5">
+       <object idref="Box2"/>
+      </void>
+     </array>
+    </void>
+    <void index="4">
+     <array class="model.data.SokoElements.movable" length="7">
+      <void index="3">
+       <object idref="Box3"/>
+      </void>
+     </array>
+    </void>
+    <void index="5">
+     <array class="model.data.SokoElements.movable" length="7"/>
+    </void>
+    <void index="6">
+     <array class="model.data.SokoElements.movable" length="7"/>
+    </void>
+   </array>
+  </void>
+  <void property="row">
+   <int>7</int>
+  </void>
+  <void property="steps">
+   <int>3</int>
+  </void>
+  <void property="time">
+   <long>1485024143086</long>
+  </void>
+ </object>
+</java>

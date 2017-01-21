@@ -8,10 +8,13 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class SokobanDisplayer extends Canvas{
 	
 	char[][] levelData;
+	int row;
+	int col;
 	
 	private StringProperty wallFileName;
 	private StringProperty playerFileName;
@@ -19,18 +22,23 @@ public class SokobanDisplayer extends Canvas{
 	private StringProperty targetFileName;
 	private StringProperty backgrounFileName;
 	
-	
-	public void setLevelData(char[][] levelData) {
-		this.levelData = levelData;
-		redraw();
-	}
-	
 	public SokobanDisplayer() {
 		this.wallFileName= new SimpleStringProperty();
 		this.playerFileName= new SimpleStringProperty();
 		this.boxFileName= new SimpleStringProperty();
 		this.backgrounFileName= new SimpleStringProperty();
 		this.targetFileName= new SimpleStringProperty();
+		
+		this.col=0;
+		this.row=0;
+	}
+	
+	public void setLevelData(char[][] levelData) {
+		this.row=levelData.length;
+		this.col=levelData[0].length;
+		this.levelData = levelData;
+		
+		//redraw();
 	}
 	
 	public String getWallFileName() {
@@ -91,12 +99,11 @@ public class SokobanDisplayer extends Canvas{
 			double H= getHeight();
 			
 			//our items size- all the cells will be in the same size
-			double w= W/levelData[0].length;
-			double h=H/levelData.length;
+			double w= W/this.col;
+			double h=H/this.row;
 			
-			GraphicsContext gc =getGraphicsContext2D();
+			GraphicsContext gc =this.getGraphicsContext2D();
 			
-			gc.clearRect(0, 0, W, H);
 			
 			Image wall = null;
 			Image box = null;
@@ -105,18 +112,20 @@ public class SokobanDisplayer extends Canvas{
 			Image target = null;
 			
 			try {
-				wall= new Image(new FileInputStream(wallFileName.get()));
-				box= new Image(new FileInputStream(boxFileName.get()));
-				player= new Image(new FileInputStream(playerFileName.get()));
-				background= new Image(new FileInputStream(backgrounFileName.get()));
-				target= new Image(new FileInputStream(targetFileName.get()));
+				wall= new Image(new FileInputStream(getWallFileName()));
+				box= new Image(new FileInputStream(getBoxFileName()));
+				player= new Image(new FileInputStream(getPlayerFileName()));
+				background= new Image(new FileInputStream(getBackgrounFileName()));
+				target= new Image(new FileInputStream(getTargetFileName()));
 				
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			for(int i=0;i<levelData.length;i++)
-				for (int j=0;j<levelData[0].length;j++){
+			
+			gc.clearRect(0, 0, W, H);
+			for(int i=0;i<this.row;i++)
+				for (int j=0;j<this.col;j++){
 					switch (levelData[i][j]){
 					
 					case '#':
@@ -140,6 +149,7 @@ public class SokobanDisplayer extends Canvas{
 						break;
 						
 					default:
+						gc.setFill(Color.BLUE);
 						break;
 					}
 				}

@@ -93,6 +93,12 @@ public class CLIView extends Observable implements IView{
 		out.flush();
 	}
 
+	@Override
+	public void displayGUI(Level level) {
+		// TODO Auto-generated method stub
+		
+	}
+
 		
 
 }

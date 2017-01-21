@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import controller.commands.DisplayGUICommand;
 import controller.commands.DisplayLevelCommand;
 import controller.commands.ExitCommand;
 import controller.commands.ICommand;
@@ -63,7 +64,8 @@ public class SokobanController implements Observer{
 		this.commandsCreator.put("SAVE", new SaveLevelCommand(this.model));
 		this.commandsCreator.put("EXIT", new ExitCommand());
 		//this.commandsCreator.put("CHANGED", new DisplayGUICommand()); 
-		this.commandsCreator.put("CHANGED", new DisplayLevelCommand(this.model,this.ui));
+		//this.commandsCreator.put("CHANGED", new DisplayLevelCommand(this.model,this.ui));
+		this.commandsCreator.put("CHANGED", new DisplayGUICommand(this.model,this.ui));
 	}
 	
 	private String[] objectToStringArray(Object obj){

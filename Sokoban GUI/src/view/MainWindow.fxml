@@ -40,7 +40,7 @@
       </HBox>
    </bottom>
    <center>
-      <SokobanDisplayer fx:id="sokobanDisplayer" height="440.0" width="440.0" BorderPane.alignment="CENTER" wallFileName="./resources/elements/wall.jpg" boxFileName="./resources/elements/Box.png" targetFileName="./resources/elements/Target.jpg" playerFileName="./resources/elements/Player.jpg" backgrounFileName="./resources/elements/background.jpg" />
+      <SokobanDisplayer fx:id="sokobanDisplayer" height="440.0" width="440.0" BorderPane.alignment="CENTER" wallFileName="./resources/elements/wall.jpg" boxFileName="./resources/elements/Box.png" targetFileName="./resources/elements/Target.jpg" playerFileName="./resources/elements/Player.png" backgrounFileName="./resources/elements/background.jpg" />
    </center>
    <left>
       <VBox prefHeight="466.0" prefWidth="161.0" BorderPane.alignment="CENTER">

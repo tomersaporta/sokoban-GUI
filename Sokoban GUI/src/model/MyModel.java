@@ -48,7 +48,7 @@ public class MyModel extends Observable implements IModel {
 	@Override
 	public void LoadLevel(String filepath) {
 		
-		LevelLoader levelLoader= this.LevelLoaderFactory.create(filepath.substring(filepath.length()-3).toLowerCase());
+		
 		//if (levelLoader==null)
 		//throw new IOException("Invalid Input, Try Again");
 		
@@ -56,6 +56,7 @@ public class MyModel extends Observable implements IModel {
 		Thread t= new Thread(new Runnable() {	
 			@Override
 			public void run() {
+				LevelLoader levelLoader= LevelLoaderFactory.create(filepath.substring(filepath.length()-3).toLowerCase());
 				try {
 					setTheLevel(levelLoader.loadLevel(new FileInputStream(new File(filepath))));
 					System.out.println("level loaded");

@@ -13,11 +13,23 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-			Scene scene = new Scene(root,600,600);
+			//BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+			
+			FXMLLoader loader=new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+			BorderPane root = (BorderPane)loader.load();
+			MainWindowController view=loader.getController();
+			
+			MyModel model=new MyModel();
+			SokobanController theController= new SokobanController(view, model);
+			
+			view.addObserver(theController);
+			model.addObserver(theController);
+			
+			Scene scene = new Scene(root,700,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -26,21 +38,21 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		
 		//CLIView ui=new CLIView();
-		MainWindowController ui = new MainWindowController();
-		MyModel model=new MyModel();
+		//MainWindowController ui = new MainWindowController();
+		//MyModel model=new MyModel();
 		//server
 		
-		SokobanController theController= new SokobanController(ui, model);
+		//SokobanController theController= new SokobanController(ui, model);
 		
-		ui.addObserver(theController);
-		model.addObserver(theController);
+		//ui.addObserver(theController);
+		//model.addObserver(theController);
 		//server-observable
 		
 		
 		
-		ui.start();
+		//ui.start();
 		
-		//launch(args);
+		launch(args);
 		
 		
 		/**
