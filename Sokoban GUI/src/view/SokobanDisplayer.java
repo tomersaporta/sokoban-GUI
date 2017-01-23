@@ -38,7 +38,7 @@ public class SokobanDisplayer extends Canvas{
 		this.col=levelData[0].length;
 		this.levelData = levelData;
 		
-		//redraw();
+		redraw();
 	}
 	
 	public String getWallFileName() {
@@ -110,6 +110,7 @@ public class SokobanDisplayer extends Canvas{
 			Image player = null;
 			Image background = null;
 			Image target = null;
+
 			
 			try {
 				wall= new Image(new FileInputStream(getWallFileName()));

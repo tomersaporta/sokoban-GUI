@@ -2,14 +2,18 @@ package controller.commands;
 
 import java.io.IOException;
 
+import controller.Controller;
+
 /**
  *<h1>Exit Level Command</h1> 
  *close all the files, release resources
  */
-public class ExitCommand implements ICommand {
+public class ExitCommand extends Command{
 
-	public ExitCommand() {
-		
+	private Controller controller;
+	
+	public ExitCommand(Controller controller) {
+		this.controller= controller;
 	}
 	
 	
@@ -18,28 +22,8 @@ public class ExitCommand implements ICommand {
 	 */
 	@Override
 	public void exceute() {
-		
-		
-		System.out.close();
-		try {
-			System.in.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.controller.stop();
 		
 	}
-
-	@Override
-	public void setParams(String input) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	
-
-
 	
 }

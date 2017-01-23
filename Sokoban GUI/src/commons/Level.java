@@ -1,6 +1,7 @@
 package commons;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 import model.data.SokoElements.Box;
 import model.data.SokoElements.Floor;
@@ -26,7 +27,9 @@ public class Level{
 	private movable [][] movearr;//array of dynamic sokobanEntity
 	private unmovable [][] background;//array of static sokobanEntity
 	
+	
 	public Level() {
+		
 		this.steps=0;
 		this.time = System.currentTimeMillis();
 		this.listBox=new ArrayList<Box>();
@@ -303,5 +306,6 @@ public class Level{
 		return result;
 				
 	}
+	
 	
 }

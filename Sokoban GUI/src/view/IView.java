@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import commons.Level;
+import javafx.beans.property.StringProperty;
 
 public interface IView {
 	
@@ -12,4 +13,6 @@ public interface IView {
 	public void start();
 	
 	public void displayGUI(Level level);
+	
+	public void createBindSteps(StringProperty Counter);
 }

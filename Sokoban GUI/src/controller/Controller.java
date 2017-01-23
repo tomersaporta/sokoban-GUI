@@ -24,11 +24,11 @@ public class Controller {
 		this.commandsQueue = commandsQueue;
 	}
 
-	void insertCommand(ICommand command) throws InterruptedException{
+	public void insertCommand(ICommand command) throws InterruptedException{
 		this.commandsQueue.put(command);
 	}
 	
-	void start(){
+	public void start(){
 		
 		Thread t = new Thread(new Runnable() {
 			
@@ -50,8 +50,9 @@ public class Controller {
 		t.start();
 	}
 	
-	void stop(){
+	public void stop(){
 		this.stop=true;
+		System.out.println("Goobye");
 	}
 }
 

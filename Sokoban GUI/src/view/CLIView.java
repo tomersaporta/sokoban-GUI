@@ -8,6 +8,7 @@ import java.util.Observable;
 import java.util.Scanner;
 
 import commons.Level;
+import javafx.beans.property.StringProperty;
 import model.data.SokoElements.Box;
 import model.data.SokoElements.Player;
 import model.data.SokoElements.movable;
@@ -95,6 +96,12 @@ public class CLIView extends Observable implements IView{
 
 	@Override
 	public void displayGUI(Level level) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void createBindSteps(StringProperty Counter) {
 		// TODO Auto-generated method stub
 		
 	}

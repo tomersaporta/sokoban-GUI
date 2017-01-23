@@ -116,4 +116,9 @@ public class MyModel extends Observable implements IModel {
 		setChanged();
 		notifyObservers("changed");
 	}
+
+	@Override
+	public int getSteps() {
+		return this.theLevel.getSteps();
+	}
 }

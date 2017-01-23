@@ -34,43 +34,11 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * create the connection between the Model View Controller
+	 */	
 	public static void main(String[] args) {
-		
-		//CLIView ui=new CLIView();
-		//MainWindowController ui = new MainWindowController();
-		//MyModel model=new MyModel();
-		//server
-		
-		//SokobanController theController= new SokobanController(ui, model);
-		
-		//ui.addObserver(theController);
-		//model.addObserver(theController);
-		//server-observable
-		
-		
-		
-		//ui.start();
-		
 		launch(args);
-		
-		
-		/**
-		 * create the connection between the Model View Controller
-		 */
-		/*
-		//MyView ui=new MyView();
-		CLIView ui=new CLIView();
-		MyModel model=new MyModel();
-		//server
-		
-		SokobanController theController= new SokobanController(ui, model);
-		
-		ui.addObserver(theController);
-		model.addObserver(theController);
-		//server-observable
-		
-		ui.start();*/
 		
 	}
 }

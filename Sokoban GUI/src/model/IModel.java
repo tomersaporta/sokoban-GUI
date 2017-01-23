@@ -8,4 +8,5 @@ public interface IModel {
 	public void LoadLevel(String filepath);
 	public void SaveLevel(String filepath);
 	public void move(String moveInput);
+	public int getSteps();
 }
