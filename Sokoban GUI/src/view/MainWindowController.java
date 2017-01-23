@@ -95,7 +95,7 @@ import javafx.stage.Stage;
 			
 			sokobanDisplayer.setOnKeyPressed(new EventHandler<KeyEvent>() {
 	
-				
+				 
 				@Override
 				public void handle(KeyEvent event) {
 					String commandInput=null;
