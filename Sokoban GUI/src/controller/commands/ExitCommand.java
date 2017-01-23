@@ -1,8 +1,7 @@
 package controller.commands;
 
-import java.io.IOException;
-
 import controller.Controller;
+import controller.server.MyServer;
 
 /**
  *<h1>Exit Level Command</h1> 
@@ -11,9 +10,11 @@ import controller.Controller;
 public class ExitCommand extends Command{
 
 	private Controller controller;
+	private MyServer server;
 	
-	public ExitCommand(Controller controller) {
+	public ExitCommand(Controller controller, MyServer server) {
 		this.controller= controller;
+		this.server= server;
 	}
 	
 	
@@ -23,7 +24,8 @@ public class ExitCommand extends Command{
 	@Override
 	public void exceute() {
 		this.controller.stop();
-		
+		//if(this.server!=null)
+		//	this.server.stop();
 	}
 	
 }

@@ -1,5 +1,7 @@
 package controller.server;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -20,15 +22,18 @@ public class MyServer {
 		
 		ServerSocket server=new ServerSocket(port);
 		System.out.println("Server alive");
-		server.setSoTimeout(10000); 
+		server.setSoTimeout(1000); 
 		
 		while(!stop){//we want to wait to the next client- we handle the clients in a line
 			try{
 				Socket aClient=server.accept(); // blocking call
 				System.out.println("The client is connected");
-				ch.handleClient(aClient.getInputStream(), aClient.getOutputStream());
-				aClient.getInputStream().close(); 
-				aClient.getOutputStream().close(); 
+				InputStream inFromClient=aClient.getInputStream();
+				OutputStream outToClient=aClient.getOutputStream();
+				ch.handleClient(inFromClient,outToClient);
+				
+				inFromClient.close(); 
+				outToClient.close(); 
 				aClient.close(); 
 			}catch(SocketTimeoutException e) {continue;} 
 		} 
@@ -41,6 +46,7 @@ public class MyServer {
 			@Override
 			public void run() {
 				try{
+					System.out.println("Running");
 					runServer();
 				}catch (Exception e){e.printStackTrace();}
 			} 
@@ -49,6 +55,7 @@ public class MyServer {
 
 	public void stop(){ 
 		stop=true; 
+		System.out.println("Stop");
 	}
 	
 	

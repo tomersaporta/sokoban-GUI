@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import controller.commands.DisplayCLICommand;
 import controller.commands.DisplayGUICommand;
 import controller.commands.DisplayLevelCommand;
 import controller.commands.ExitCommand;
@@ -11,6 +12,8 @@ import controller.commands.ICommand;
 import controller.commands.LoadLevelCommand;
 import controller.commands.MoveCommand;
 import controller.commands.SaveLevelCommand;
+import controller.server.MyServer;
+import controller.server.SokobanClientHandler;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.IModel;
@@ -21,6 +24,9 @@ public class SokobanController implements Observer{
 	private IView ui;
 	private IModel model;
 	private Controller controller;
+	private SokobanClientHandler clientHandler;
+	private MyServer theServer;
+	
 	HashMap<String, ICommand> commandsCreator;
 	private StringProperty countSteps;
 	
@@ -30,6 +36,22 @@ public class SokobanController implements Observer{
 		this.model=model;
 		this.controller=new Controller();
 		this.countSteps=new SimpleStringProperty();
+		
+		initcommandsCreator();
+		
+		this.controller.start();
+		this.ui.createBindSteps(this.countSteps);
+	}
+	
+	public SokobanController(IView ui,IModel model,SokobanClientHandler clientHandler,int port) {		
+		this.ui=ui;
+		this.model=model;
+		this.controller=new Controller();
+		this.countSteps=new SimpleStringProperty();
+		this.clientHandler=clientHandler;
+		
+		this.theServer=new MyServer(port, this.clientHandler);
+		this.theServer.start();
 		
 		initcommandsCreator();
 		
@@ -64,12 +86,10 @@ public class SokobanController implements Observer{
 	private void initcommandsCreator(){
 		this.commandsCreator= new HashMap<String,ICommand>();
 		this.commandsCreator.put("LOAD", new LoadLevelCommand(this.model));
-		this.commandsCreator.put("DISPLAY", new DisplayLevelCommand(this.model,this.ui));//separate to 2
+		this.commandsCreator.put("DISPLAY", new DisplayCLICommand(this.model, this.clientHandler));//separate to 2
 		this.commandsCreator.put("MOVE", new MoveCommand(this.model,this.countSteps));
 		this.commandsCreator.put("SAVE", new SaveLevelCommand(this.model));
-		this.commandsCreator.put("EXIT", new ExitCommand(this.controller));
-		//this.commandsCreator.put("CHANGED", new DisplayGUICommand()); 
-		//this.commandsCreator.put("CHANGED", new DisplayLevelCommand(this.model,this.ui));
+		this.commandsCreator.put("EXIT", new ExitCommand(this.controller, this.theServer));
 		this.commandsCreator.put("CHANGED", new DisplayGUICommand(this.model,this.ui));
 	}
 	

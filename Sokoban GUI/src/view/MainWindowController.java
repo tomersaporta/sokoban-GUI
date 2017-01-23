@@ -33,12 +33,9 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
-import javafx.stage.PopupBuilder;
 import javafx.stage.Stage;
 		
-		public class MainWindowController extends java.util.Observable implements Initializable, IView {
-			
+		public class MainWindowController extends java.util.Observable implements Initializable, IView {		
 			
 		@FXML
 		private SokobanDisplayer sokobanDisplayer;
@@ -55,6 +52,14 @@ import javafx.stage.Stage;
 		
 		@FXML
 		private Button exitButton;
+		
+		//finishLevel
+		private boolean isFinished;
+		
+		
+		public MainWindowController() {
+			this.isFinished=false;
+		}
 		
 				
 		private void initTimer(){
@@ -74,10 +79,15 @@ import javafx.stage.Stage;
 						minCount++;
 						secCount=0;
 					}
-					if(secCount<10)
-					timerCount.set(""+(minCount)+":0"+(secCount));
+					if (minCount<10)
+						if(secCount<10)
+							timerCount.set("0"+(minCount)+":0"+(secCount));
+						else
+							timerCount.set("0"+(minCount)+":"+(secCount));
 					else
 					timerCount.set(""+(minCount)+":"+(secCount));
+					
+						
 				}
 			}, 0, 1000);		
 
@@ -143,6 +153,7 @@ import javafx.stage.Stage;
 			setFocus();
 			stopTimer();
 			initTimer();
+			this.isFinished=false;
 			
 
 		}
@@ -168,19 +179,21 @@ import javafx.stage.Stage;
 		}
 		
 		public void finishLevel(){
+			if(this.isFinished==true)return;
 			Platform.runLater(new Runnable() {
 				
 				@Override
 				public void run() {
 					Alert alert=new Alert(AlertType.INFORMATION);
 					alert.setTitle("Finish Level");
-					alert.setContentText("Congratulations!! ");
+					alert.setHeaderText("Congratulations!!!");
 					alert.setContentText("Steps: "+ countSteps.getText()+"\n Time: "+timerText.getText());
 					alert.show();
 					
 				}
 			});
 			stopTimer();
+			this.isFinished=true;
 		}
 		private void stopTimer(){
 			if(timer!=null)
@@ -214,8 +227,6 @@ import javafx.stage.Stage;
 				{	
 					e.printStackTrace();
 				}
-			
-				
 				
 			}
 			
@@ -250,8 +261,6 @@ import javafx.stage.Stage;
 			
 			if(level.isEndOfLevel()){
 				finishLevel();
-				notifyObservers("exit");
-				
 			}
 		}
 		
