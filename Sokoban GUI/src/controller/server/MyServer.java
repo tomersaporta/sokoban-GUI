@@ -15,22 +15,24 @@ public class MyServer {
 	public MyServer(int port, ClientHandler ch) {
 		this.port=port;
 		this.ch=ch;
-		stop=false;
+		this.stop=false;
 	}
 	
 	private void runServer()throws Exception { 
 		
-		ServerSocket server=new ServerSocket(port);
+		ServerSocket server=new ServerSocket(this.port);
 		System.out.println("Server alive");
 		server.setSoTimeout(1000); 
 		
 		while(!stop){//we want to wait to the next client- we handle the clients in a line
 			try{
 				Socket aClient=server.accept(); // blocking call
+				
 				System.out.println("The client is connected");
+				
 				InputStream inFromClient=aClient.getInputStream();
 				OutputStream outToClient=aClient.getOutputStream();
-				ch.handleClient(inFromClient,outToClient);
+				this.ch.handleClient(inFromClient,outToClient);
 				
 				inFromClient.close(); 
 				outToClient.close(); 
@@ -55,7 +57,6 @@ public class MyServer {
 
 	public void stop(){ 
 		stop=true; 
-		System.out.println("Stop");
 	}
 	
 	

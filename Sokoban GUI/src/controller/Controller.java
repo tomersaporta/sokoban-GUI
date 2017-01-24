@@ -52,7 +52,7 @@ public class Controller {
 	
 	public void stop(){
 		this.stop=true;
-		System.out.println("Goobye");
+		System.out.println("Goodbye");
 	}
 }
 

@@ -15,7 +15,8 @@ public class DisplayCLICommand extends Command {
 	
 	@Override
 	public void exceute() {
-		this.clientHandler.aSyncSendOutput(this.model.getCurrentLevel().getLevelBored());
+		this.clientHandler.sendLevel(this.model.getCurrentLevel().getLevelBored());
+		
 		
 	}
 

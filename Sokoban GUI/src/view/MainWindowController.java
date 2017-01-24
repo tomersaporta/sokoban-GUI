@@ -1,8 +1,11 @@
 		package view;
 		
-		import java.io.File;
+		import java.beans.XMLDecoder;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -10,7 +13,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import commons.Level;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -26,7 +28,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -34,12 +35,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 		
 		public class MainWindowController extends java.util.Observable implements Initializable, IView {		
 			
 		@FXML
 		private SokobanDisplayer sokobanDisplayer;
 			
+		//Steps
 		@FXML
 		private Text countSteps;
 			
@@ -50,17 +53,55 @@ import javafx.stage.Stage;
 		int secCount, minCount;
 		StringProperty timerCount;
 		
-		@FXML
-		private Button exitButton;
+		//Exit
+		//@FXML
+		//private Button exitButton;
 		
 		//finishLevel
 		private boolean isFinished;
 		
+		//Keyboard settings;
+		private ViewSettings viewSettings;
+		
+		//Stage
+		private Stage primaryStage;
 		
 		public MainWindowController() {
 			this.isFinished=false;
+			this.viewSettings=initViewSettings("./resources/viewSettings/viewSettings.xml");
 		}
 		
+		@Override
+		public void initialize(URL location, ResourceBundle resources) {
+			setFocus();
+			
+			sokobanDisplayer.addEventFilter(MouseEvent.MOUSE_CLICKED, (e)->sokobanDisplayer.requestFocus());
+			
+			sokobanDisplayer.setOnKeyPressed(new EventHandler<KeyEvent>() {
+	
+				 
+				@Override
+				public void handle(KeyEvent event) {
+					String commandInput=null;
+					if(event.getCode()==viewSettings.getMoveUp()){
+						commandInput="Move up";
+					}
+					else if(event.getCode()==viewSettings.getMoveDown()){
+						commandInput="Move down";
+					}
+					else if(event.getCode()==viewSettings.getMoveRight()){
+						commandInput="Move right";
+					}
+					else if(event.getCode()==viewSettings.getMoveLeft()){
+						commandInput="Move left";
+					}
+					
+					setChanged();
+					notifyObservers(commandInput);
+				}
+			});
+			
+		}
 				
 		private void initTimer(){
 			
@@ -93,45 +134,18 @@ import javafx.stage.Stage;
 
 		}
 		
+		private void stopTimer(){
+			if(timer!=null)
+				timer.cancel();
+			
+		}
+		
 		@Override			
 		public void createBindSteps(StringProperty Counter){
 			this.countSteps.textProperty().bind(Counter);
 		}
 		
-		@Override
-		public void initialize(URL location, ResourceBundle resources) {
-			
-			sokobanDisplayer.addEventFilter(MouseEvent.MOUSE_CLICKED, (e)->sokobanDisplayer.requestFocus());
-			
-			sokobanDisplayer.setOnKeyPressed(new EventHandler<KeyEvent>() {
-	
-				 
-				@Override
-				public void handle(KeyEvent event) {
-					String commandInput=null;
-					if(event.getCode()==KeyCode.UP){
-						commandInput="Move up";
-					}
-					else if(event.getCode()==KeyCode.DOWN){
-						commandInput="Move down";
-					}
-					else if(event.getCode()==KeyCode.RIGHT){
-						commandInput="Move right";
-					}
-					else if(event.getCode()==KeyCode.LEFT){
-						commandInput="Move left";
-					}
-					
-					setChanged();
-					notifyObservers(commandInput);
-				}
-			});
-			
-			
-		}
-		
-	
-		
+		//GUI CODE
 		public void openFile(){
 			FileChooser fc=new FileChooser();
 			fc.setTitle("Open level file");
@@ -149,8 +163,8 @@ import javafx.stage.Stage;
 				setChanged();
 				notifyObservers("load "+choosen.getPath());
 			}
-							
-			setFocus();
+			
+			//setFocus();
 			stopTimer();
 			initTimer();
 			this.isFinished=false;
@@ -179,7 +193,7 @@ import javafx.stage.Stage;
 		}
 		
 		public void finishLevel(){
-			if(this.isFinished==true)return;
+			if(this.isFinished==true)return;//display popup only one time
 			Platform.runLater(new Runnable() {
 				
 				@Override
@@ -195,12 +209,7 @@ import javafx.stage.Stage;
 			stopTimer();
 			this.isFinished=true;
 		}
-		private void stopTimer(){
-			if(timer!=null)
-				timer.cancel();
-			
-		}
-		
+	
 		public void exitWindow(){
 			
 			Alert alert=new Alert(AlertType.CONFIRMATION);
@@ -209,50 +218,13 @@ import javafx.stage.Stage;
 			
 			Optional<ButtonType> result=alert.showAndWait();
 			
-			if(result.get().getText().equals("OK")){
+			if(result.get() == ButtonType.OK){
 				setChanged();
 				notifyObservers("exit");
-				Stage stage = new Stage();
-				Parent root;
-			
-				try 
-				{
-					root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-					stage.setScene(new Scene(root));
-					stage.initModality(Modality.APPLICATION_MODAL);
-					stage=(Stage)exitButton.getScene().getWindow();
-					stage.close();
-				} 
-				catch (IOException e) 
-				{	
-					e.printStackTrace();
-				}
-				
+				Platform.exit();
 			}
 			
 		}
-	
-	
-		@Override
-		public void displayLevel(Level level, OutputStream out) throws IOException {
-			// TODO Auto-generated method stub
-			
-		}
-	
-	
-	
-		@Override
-		public void start() {
-			Thread t= new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					Application.launch(Main.class);
-				}
-			});
-			t.start();
-		}
-	
 	
 	
 		@Override
@@ -260,7 +232,9 @@ import javafx.stage.Stage;
 			sokobanDisplayer.setLevelData(level.getLevelBored());
 			
 			if(level.isEndOfLevel()){
+				this.isFinished=false;
 				finishLevel();
+				System.out.println("finish");
 			}
 		}
 		
@@ -279,8 +253,40 @@ import javafx.stage.Stage;
 	                });                    
 	            }
 	        });
-		}				
-	
-	
+		}	
 		
+		//load XML file
+		private ViewSettings initViewSettings(String filepath){
+			
+			XMLDecoder decoder;
+			ViewSettings vs=null;
+			try {
+				decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(new File(filepath))));
+				vs= (ViewSettings)decoder.readObject();
+				decoder.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return vs;
+		}
+
+		@Override
+		public void setPrimaryStage(Stage primaryStage){
+			this.primaryStage= primaryStage;
+			exitPrimaryStage();
+		}
+
+		@Override
+		public void exitPrimaryStage() {
+			this.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+				@Override
+				public void handle(WindowEvent event) {
+					setChanged();
+					notifyObservers("exit");
+				}
+			});
+		}
 	}

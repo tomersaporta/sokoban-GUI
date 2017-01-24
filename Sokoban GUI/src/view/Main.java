@@ -33,9 +33,7 @@ public class Main extends Application {
 			
 			//get the args from the main
 			List<String>args=getParameters().getRaw();
-			for(String raw:args){
-				System.out.println(raw);
-			}
+			
 			
 			//condition for run with server
 			if(args.size()>0&&args.get(0).toLowerCase().equals("-server")){
@@ -48,12 +46,14 @@ public class Main extends Application {
 			else//without server
 				theController= new SokobanController(view, model);
 			
-			view.addObserver(theController);
 			model.addObserver(theController);
+			view.addObserver(theController);
+			view.setPrimaryStage(primaryStage);
 			
 			Scene scene = new Scene(root,700,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("SOKOBAN");
 			primaryStage.show();
 			
 		} catch(Exception e) {

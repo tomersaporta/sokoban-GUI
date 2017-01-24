@@ -24,8 +24,8 @@ public class ExitCommand extends Command{
 	@Override
 	public void exceute() {
 		this.controller.stop();
-		//if(this.server!=null)
-		//	this.server.stop();
+		if(this.server!=null)
+			this.server.stop();
 	}
 	
 }

@@ -1,18 +1,18 @@
 package view;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import commons.Level;
 import javafx.beans.property.StringProperty;
+import javafx.stage.Stage;
 
 public interface IView {
-	
-	public void displayLevel(Level level,OutputStream out) throws IOException;
-	
-	public void start();
 	
 	public void displayGUI(Level level);
 	
 	public void createBindSteps(StringProperty Counter);
+	
+	public void setPrimaryStage(Stage primaryStage);
+	
+	public void exitPrimaryStage();
+
+	
 }

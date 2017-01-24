@@ -6,7 +6,6 @@ import java.util.Observer;
 
 import controller.commands.DisplayCLICommand;
 import controller.commands.DisplayGUICommand;
-import controller.commands.DisplayLevelCommand;
 import controller.commands.ExitCommand;
 import controller.commands.ICommand;
 import controller.commands.LoadLevelCommand;
