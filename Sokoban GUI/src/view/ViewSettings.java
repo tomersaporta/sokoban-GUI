@@ -10,10 +10,10 @@ public class ViewSettings {
 	private KeyCode moveRight;
 	
 	public ViewSettings() {
-		moveDown=KeyCode.DOWN;
-		moveLeft=KeyCode.LEFT;
-		moveUp=KeyCode.UP;
-		moveRight=KeyCode.RIGHT;
+		this.moveDown=KeyCode.DOWN;
+		this.moveLeft=KeyCode.LEFT;
+		this.moveUp=KeyCode.UP;
+		this.moveRight=KeyCode.RIGHT;
 	}
 	
 	

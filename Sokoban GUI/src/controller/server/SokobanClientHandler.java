@@ -133,9 +133,9 @@ public class SokobanClientHandler extends Observable implements ClientHandler {
 	}
 	
 	
-	private void insertToQueue(String str){
-		try {
+	public void insertToQueue(String str){
 
+		try {
 			this.msgToClient.put(str);
 		} catch (InterruptedException e) {
 			e.printStackTrace();

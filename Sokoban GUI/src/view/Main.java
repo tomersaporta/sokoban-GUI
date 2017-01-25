@@ -32,6 +32,7 @@ public class Main extends Application {
 			
 			
 			//get the args from the main
+			
 			List<String>args=getParameters().getRaw();
 			
 			

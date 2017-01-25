@@ -1,7 +1,7 @@
 package commons;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Timer;
 
 import model.data.SokoElements.Box;
 import model.data.SokoElements.Floor;
@@ -15,7 +15,7 @@ import model.data.SokoElements.unmovable;
  * <h1>Level</h1>
  *manage the whole data of the level
  */
-public class Level{
+public class Level implements Serializable{
 	
 	private int steps;
 	private long time;
@@ -307,5 +307,12 @@ public class Level{
 				
 	}
 	
+	public boolean isValidPosition(Position pos){
+		
+		if((pos.getX()>=0&&pos.getX()<this.row)&&(pos.getY()>=0&&pos.getY()<this.col))
+			return true;
+		return false;
+		
+	}
 	
 }

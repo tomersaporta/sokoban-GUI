@@ -22,6 +22,7 @@ public class SokobanDisplayer extends Canvas{
 	private StringProperty targetFileName;
 	private StringProperty backgrounFileName;
 	
+	
 	public SokobanDisplayer() {
 		this.wallFileName= new SimpleStringProperty();
 		this.playerFileName= new SimpleStringProperty();
@@ -90,7 +91,30 @@ public class SokobanDisplayer extends Canvas{
 		this.backgrounFileName.set(backgrounFileName);;
 	}
 
-
+	public void redrawStart(){
+		
+		double W= getWidth();
+		double H= getHeight();
+		Image startMenu= null;
+		
+		GraphicsContext gc =this.getGraphicsContext2D();
+		try {
+			
+			gc.clearRect(0, 0, W, H);
+			
+			startMenu=new Image(new FileInputStream("./resources/elements/backMain.png"));
+			gc.drawImage(startMenu, 0, 0,W, H);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	
 	public void redraw(){
 		
 		if(this.levelData!=null){
@@ -99,8 +123,8 @@ public class SokobanDisplayer extends Canvas{
 			double H= getHeight();
 			
 			//our items size- all the cells will be in the same size
-			double w= W/this.col;
-			double h=H/this.row;
+			double w= W/Math.max(this.col, this.row);
+			double h=H/Math.max(this.col, this.row);
 			
 			GraphicsContext gc =this.getGraphicsContext2D();
 			

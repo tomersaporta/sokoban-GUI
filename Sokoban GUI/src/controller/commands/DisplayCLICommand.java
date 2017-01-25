@@ -15,7 +15,8 @@ public class DisplayCLICommand extends Command {
 	
 	@Override
 	public void exceute() {
-		this.clientHandler.sendLevel(this.model.getCurrentLevel().getLevelBored());
+		if(model.getCurrentLevel()!=null)
+			this.clientHandler.sendLevel(this.model.getCurrentLevel().getLevelBored());
 		
 		
 	}

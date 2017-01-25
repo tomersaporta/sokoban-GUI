@@ -28,9 +28,15 @@ public class MySokobanPolicy extends GeneralSokobanPolicy {
 	@Override
 	public void checkPolicy(Player player, IMoveType moveType) {
 		
+		GeneralElement elementInNextPosition=null;
+		GeneralElement elementInBoxNextPosition=null;
+		
 		//get the next Position step
 		Position nextPosition= moveType.getNextPosition(player.getPosition());
-		GeneralElement elementInNextPosition=getLevel().getElementInPosition(nextPosition);
+		
+		if(getLevel().isValidPosition(nextPosition))
+			elementInNextPosition=getLevel().getElementInPosition(nextPosition);
+		else return;
 		
 		if(elementInNextPosition instanceof unmovable){
 			if(((unmovable) elementInNextPosition).isStepable())
@@ -40,51 +46,16 @@ public class MySokobanPolicy extends GeneralSokobanPolicy {
 		else if (elementInNextPosition instanceof Box)
 		{
 			Position boxNextPosition= moveType.getNextPosition(elementInNextPosition.getPosition());
-			GeneralElement elementInBoxNextPosition=getLevel().getElementInPosition(boxNextPosition);
+			if(getLevel().isValidPosition(boxNextPosition))
+				elementInBoxNextPosition=getLevel().getElementInPosition(boxNextPosition);
 			
+			else return;
+				
 			if(elementInBoxNextPosition instanceof Floor){
 				getLevel().upDateLevelPlayerBoxMoves(player,(Box)elementInNextPosition, boxNextPosition);
 			}
 		}
-	/*
 	
-	
-		public void checkPolicy(GeneralElement element, IMoveType moveType) {
-			
-			//get the next Position step
-			Position2D nextPosition=(Position2D) moveType.getNextPosition(element.getPosition());
-			GeneralElement elementInNextPosition=getLevel().getElementInPosition(nextPosition);
-			
-			if(isPosibleToMoveThrough(element, elementInNextPosition))
-				{
-					checkPolicy(elementInNextPosition, moveType);
-				}
-			}
-			
-		}
-		
-		boolean isPosibleToMoveThrough(GeneralElement element1, GeneralElement element2){
-			if(element1 instanceof Player){
-				if(element2 instanceof Floor)
-					return true;
-				if(element2 instanceof Wall)
-					return false;
-				if(element2 instanceof Box)
-					return true;		
-				if(element2 instanceof Player)
-					return false;
-		      }
-			if(element1 instanceof Box){
-				if(element2 instanceof Floor)
-					return true;
-				if(element2 instanceof Wall)
-					return false;
-				if(element2 instanceof Box)
-					return false;
-				if(element2 instanceof Player)
-					return false;
-    	      }
-			return false;*/
-		}
+	}
 
 }

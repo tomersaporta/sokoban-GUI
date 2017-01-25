@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import controller.commands.DisplayCLICommand;
 import controller.commands.DisplayGUICommand;
+import controller.commands.ErrorCommand;
 import controller.commands.ExitCommand;
 import controller.commands.ICommand;
 import controller.commands.LoadLevelCommand;
@@ -90,6 +91,7 @@ public class SokobanController implements Observer{
 		this.commandsCreator.put("SAVE", new SaveLevelCommand(this.model));
 		this.commandsCreator.put("EXIT", new ExitCommand(this.controller, this.theServer));
 		this.commandsCreator.put("CHANGED", new DisplayGUICommand(this.model,this.ui));
+		this.commandsCreator.put("ERROR", new ErrorCommand(this.ui,this.clientHandler));
 	}
 	
 	private String[] objectToStringArray(Object obj){
@@ -108,16 +110,26 @@ public class SokobanController implements Observer{
 		
 		String[]params=objectToStringArray(arg);
 		ICommand command=this.commandsCreator.get(params[0]);
-		if(params.length>1)
-			command.setParams(params[1]);
-		else
-			command.setParams(null);
-		try {
-			this.controller.insertCommand(command);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(command==null){
+			this.ui.displayError("Invalid command");
+	      	if(this.clientHandler!=null)
+	      		this.clientHandler.insertToQueue("Invalid command");
 		}
+		else{
+			if(params.length>1)
+				command.setParams(params[1]);
+			else
+				command.setParams(null);
+			try {
+				this.controller.insertCommand(command);
+			} catch (InterruptedException e) {
+				this.ui.displayError("Couldn't entred command into the queue");
+		      	if(this.clientHandler!=null)
+		      		this.clientHandler.insertToQueue("Couldn't entred command into the queue");
+			}
+		}
+	
+		
 		
 	}
 

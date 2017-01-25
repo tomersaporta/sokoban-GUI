@@ -47,22 +47,28 @@ public class MyModel extends Observable implements IModel {
 
 	@Override
 	public void LoadLevel(String filepath) {
-		
-		
-		//if (levelLoader==null)
-		//throw new IOException("Invalid Input, Try Again");
-		
 
 		Thread t= new Thread(new Runnable() {	
 			@Override
 			public void run() {
+				
 				LevelLoader levelLoader= LevelLoaderFactory.create(filepath.substring(filepath.length()-3).toLowerCase());
+				
+				if (levelLoader==null){//extension not valid
+					setChanged();
+					notifyObservers("Error Invalid file!");
+					return;
+				}
+					
 				try {
 					setTheLevel(levelLoader.loadLevel(new FileInputStream(new File(filepath))));
-					System.out.println("level loaded");
-				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					setChanged();
+					notifyObservers("changed");
+					
+				} catch (ClassNotFoundException | IOException e) {//file not found
+					setChanged();
+					notifyObservers("Error Invalid file!");
+					return;
 				}
 			}
 		});
@@ -71,30 +77,38 @@ public class MyModel extends Observable implements IModel {
 		try {
 			t.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			setChanged();
+			notifyObservers("Error "+e.getMessage());
 		}
-		setChanged();
-		notifyObservers("changed");
+		
 	}
 
 	@Override
 	public void SaveLevel(String filepath) {
 		
-		LevelSaver levelSaver=this.LevelSaverFactory.create(filepath.substring(filepath.length()-3).toLowerCase());
+		if(this.theLevel==null){
+			setChanged();
+			notifyObservers("Error You need to load level first!");
+			return;
+		}
 		
-		//saveLevel didn't created
-		//if (levelSaver==null)
-			//throw new IOException("Invalid command");
 		Thread t =new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
+				
+				LevelSaver levelSaver=LevelSaverFactory.create(filepath.substring(filepath.length()-3).toLowerCase());
+				if(levelSaver==null){//extension not valid
+					setChanged();
+					notifyObservers("Error Invalid file!");
+					return;
+				}
 				try {
 					levelSaver.saveLevel(getTheLevel(), new FileOutputStream(new File(filepath)));
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					setChanged();
+					notifyObservers("Error Invalid file!");
+					return;
 				}				
 			}
 		});
@@ -103,14 +117,22 @@ public class MyModel extends Observable implements IModel {
 
 	@Override
 	public void move(String moveInput) {
-
+		
+		if(this.theLevel==null){
+			setChanged();
+			notifyObservers("Error You need to load level first!");
+			return;
+		}
 
 		ISokobanPolicy policy=new MySokobanPolicy(this.theLevel);
 		IMoveType moveType=this.MoveTypeFactory.create(moveInput.toUpperCase());
 		
 		//moveType didn't created
-		//if (moveType==null)
-			//throw new IOException("Invalid command");
+		if (moveType==null){
+			setChanged();
+			notifyObservers("Error Invalid move type!");
+			return;
+		}
 		
 		policy.checkPolicy(this.theLevel.getListPlayer().get(0), moveType);
 		setChanged();
@@ -119,6 +141,8 @@ public class MyModel extends Observable implements IModel {
 
 	@Override
 	public int getSteps() {
-		return this.theLevel.getSteps();
+		if(this.theLevel!=null)
+			return this.theLevel.getSteps();
+		return 0;
 	}
 }

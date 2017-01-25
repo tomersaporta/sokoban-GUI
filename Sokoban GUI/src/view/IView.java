@@ -13,6 +13,8 @@ public interface IView {
 	public void setPrimaryStage(Stage primaryStage);
 	
 	public void exitPrimaryStage();
+	
+	public void displayError(String error);
 
 	
 }
