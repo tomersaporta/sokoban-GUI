@@ -35,6 +35,7 @@ public class SokobanDisplayer extends Canvas{
 	}
 	
 	public void setLevelData(char[][] levelData) {
+		
 		this.row=levelData.length;
 		this.col=levelData[0].length;
 		this.levelData = levelData;
@@ -118,6 +119,7 @@ public class SokobanDisplayer extends Canvas{
 	public void redraw(){
 		
 		if(this.levelData!=null){
+			
 			//the canvas sizes
 			double W= getWidth();
 			double H= getHeight();
@@ -127,7 +129,6 @@ public class SokobanDisplayer extends Canvas{
 			double h=H/Math.max(this.col, this.row);
 			
 			GraphicsContext gc =this.getGraphicsContext2D();
-			
 			
 			Image wall = null;
 			Image box = null;
@@ -149,6 +150,7 @@ public class SokobanDisplayer extends Canvas{
 			}
 			
 			gc.clearRect(0, 0, W, H);
+			
 			for(int i=0;i<this.row;i++)
 				for (int j=0;j<this.col;j++){
 					switch (levelData[i][j]){

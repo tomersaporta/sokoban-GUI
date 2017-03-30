@@ -43,7 +43,8 @@ public class SokobanController implements Observer{
 		this.ui.createBindSteps(this.countSteps);
 	}
 	
-	public SokobanController(IView ui,IModel model,SokobanClientHandler clientHandler,int port) {		
+	public SokobanController(IView ui,IModel model,SokobanClientHandler clientHandler,int port) {	
+		
 		this.ui=ui;
 		this.model=model;
 		this.controller=new Controller();
@@ -84,6 +85,7 @@ public class SokobanController implements Observer{
 	}
 
 	private void initcommandsCreator(){
+		
 		this.commandsCreator= new HashMap<String,ICommand>();
 		this.commandsCreator.put("LOAD", new LoadLevelCommand(this.model));
 		this.commandsCreator.put("DISPLAY", new DisplayCLICommand(this.model, this.clientHandler));//separate to 2
@@ -128,8 +130,6 @@ public class SokobanController implements Observer{
 		      		this.clientHandler.insertToQueue("Couldn't entred command into the queue");
 			}
 		}
-	
-		
 		
 	}
 

@@ -9,7 +9,7 @@ public class Run {
 		
 		SokobanClientHandler ch=new SokobanClientHandler();
 		
-		int port=2057;
+		int port=7000;
 		MyServer theServer=new MyServer(port, ch);
 		theServer.start();
 	}
