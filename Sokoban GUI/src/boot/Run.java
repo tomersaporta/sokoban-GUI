@@ -12,8 +12,7 @@ public class Run {
 		int port=7000;
 		MyServer theServer=new MyServer(port, ch);
 		theServer.start();
-		System.out.println("Tomer Test Git");
-		System.out.println("Tomer Test Git2");
+
 	}
 }
 	
