@@ -13,6 +13,7 @@ public class Run {
 		MyServer theServer=new MyServer(port, ch);
 		theServer.start();
 		System.out.println("Tomer Test Git");
+		System.out.println("Tomer Test Git2");
 	}
 }
 	
