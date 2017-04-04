@@ -34,6 +34,9 @@ public class MyTextLevelLoader extends CommonLevelLoader implements LevelLoader 
 		int col=0;
         int row=0;
         
+        String levelID=in.readLine();
+        //TODO-line is empty
+        
        	while ((line = in.readLine()) != null) {
             if(line.length()>col)
             	col=line.length();
@@ -49,7 +52,8 @@ public class MyTextLevelLoader extends CommonLevelLoader implements LevelLoader 
 		ElementMovableFactory movableFactory=new ElementMovableFactory();
 		ElementUnmovableFactory unmovableFactory=new ElementUnmovableFactory();
 		
-		Level newLevel=new Level(row,col);
+		Level newLevel=new Level(row,col,levelID);
+	
 		
 		
 		

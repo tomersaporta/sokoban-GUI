@@ -22,7 +22,8 @@ public class MyTextLevelSaver implements LevelSaver {
 	public void saveLevel(Level myLevel, OutputStream file) throws IOException {
 		
 		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(file));
-		
+		out.write(myLevel.getLevelID());
+		out.newLine();
 		for(int i=0;i<myLevel.getRow() ;i++){
 			for (int j=0;j<myLevel.getCol();j++){
 				movable m = myLevel.getMovearr()[i][j];

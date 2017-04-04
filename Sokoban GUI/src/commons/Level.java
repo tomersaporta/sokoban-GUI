@@ -26,6 +26,7 @@ public class Level implements Serializable{
 	private int col;
 	private movable [][] movearr;//array of dynamic sokobanEntity
 	private unmovable [][] background;//array of static sokobanEntity
+	private String levelID;
 	
 	
 	public Level() {
@@ -39,6 +40,7 @@ public class Level implements Serializable{
 		this.col=0;
 		this.movearr=new movable[this.row][this.col];
 		this.background=new unmovable[this.row][this.col];
+		this.levelID=null;
 	}
 	
 	public Level(int row, int col){
@@ -49,6 +51,26 @@ public class Level implements Serializable{
 		this.listTarget=new ArrayList<Target>();
 		this.row=row;
 		this.col=col;
+		this.movearr=new movable[this.row][this.col];
+		this.background=new unmovable[this.row][this.col];
+		this.levelID=null;
+		//initialize the background array to Floor
+		for(int i=0;i<this.row;i++)
+			for(int j=0;j<this.col;j++)
+			{
+				this.background[i][j]=new Floor();
+			}
+	}
+	
+	public Level(int row, int col,String levelID){
+		this.steps=0;
+		this.time = System.currentTimeMillis();
+		this.listBox=new ArrayList<Box>();
+		this.listPlayer=new ArrayList<Player>();
+		this.listTarget=new ArrayList<Target>();
+		this.row=row;
+		this.col=col;
+		this.levelID=levelID;
 		this.movearr=new movable[this.row][this.col];
 		this.background=new unmovable[this.row][this.col];
 		
@@ -138,6 +160,15 @@ public class Level implements Serializable{
 		this.movearr = movearr;
 	}
 	
+	
+	public String getLevelID() {
+		return levelID;
+	}
+
+	public void setLevelID(String levelID) {
+		this.levelID = levelID;
+	}
+
 	/**
 	 * set movable entity in the movearr array
 	 * @param moveobj Set this movable element to the movearr
