@@ -2,6 +2,15 @@ package commons;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import model.data.SokoElements.Box;
 import model.data.SokoElements.Floor;
@@ -11,23 +20,40 @@ import model.data.SokoElements.Position;
 import model.data.SokoElements.Target;
 import model.data.SokoElements.movable;
 import model.data.SokoElements.unmovable;
+import model.db.User;
 /**
  * <h1>Level</h1>
  *manage the whole data of the level
  */
+@Entity(name="Levels")
 public class Level implements Serializable{
-	
-	private int steps;
-	private long time;
-    private ArrayList<Box> listBox;
-	private ArrayList<Player> listPlayer;
-	private ArrayList<Target> listTarget;
-	private int row;
-	private int col;
-	private movable [][] movearr;//array of dynamic sokobanEntity
-	private unmovable [][] background;//array of static sokobanEntity
+
+	@Id
+	@Column(name="LevelID")
 	private String levelID;
 	
+	@Transient
+	private int steps;
+	@Transient
+	private long time;
+	@Transient
+    private ArrayList<Box> listBox;
+	@Transient
+	private ArrayList<Player> listPlayer;
+	@Transient
+	private ArrayList<Target> listTarget;
+	@Transient
+	private int row;
+	@Transient
+	private int col;
+	@Transient
+	private movable [][] movearr;//array of dynamic sokobanEntity
+	@Transient
+	private unmovable [][] background;//array of static sokobanEntity
+	
+	@OneToMany
+	@JoinColumn(name="LevelID")
+	private List<User> users = new ArrayList<User>();
 	
 	public Level() {
 		
@@ -167,6 +193,24 @@ public class Level implements Serializable{
 
 	public void setLevelID(String levelID) {
 		this.levelID = levelID;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Level [steps=" + steps + ", time=" + time + ", listBox=" + listBox + ", listPlayer=" + listPlayer
+				+ ", listTarget=" + listTarget + ", row=" + row + ", col=" + col + ", movearr="
+				+ Arrays.toString(movearr) + ", background=" + Arrays.toString(background) + ", levelID=" + levelID
+				+ ", users=" + users + "]";
 	}
 
 	/**

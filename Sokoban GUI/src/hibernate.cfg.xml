@@ -4,7 +4,7 @@
 		<property name="connection.driver_class">
 			com.microsoft.sqlserver.jdbc.SQLServerDriver
 		</property>
-		<property name="connection.url">jdbc:sqlserver://localhost:1433;database=MySokobanDB;integratedSecurity=true;
+		<property name="connection.url">jdbc:sqlserver://localhost:1433;database=SokobanDB;integratedSecurity=true;
 		</property>
 		<!-- JDBC connection pool (use the built-in) -->
 		<property name="connection.pool_size">1</property>
@@ -13,9 +13,9 @@
 		</property>
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
-		<mapping class="entities.User"></mapping>
-		<mapping class="entities.Level"></mapping>
-		<mapping class="entities.Score"></mapping>
+		<mapping class="model.db.Record"></mapping>
+		<mapping class="model.db.User"></mapping>
+		<mapping class="commons.Level"></mapping>
 		
 	</session-factory>
 </hibernate-configuration>
