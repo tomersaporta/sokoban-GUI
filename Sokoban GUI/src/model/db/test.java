@@ -12,11 +12,12 @@ public class test {
 		Manager m=Manager.getInstance();
 		
 		m.getAllRecords();
-		/*User u=new User("123456", "Tomer");
+		/*
+		User u=new User("2223", "Tomer");
 		m.add(u);
 		
 		Level l=new Level();
-		l.setLevelID("level1");
+		l.setLevelID("level4");
 		m.add(l);
 		Record r=new Record(l.getLevelID(), u.getId(), 60, new Time(18, 00, 00));
 		//Record rec = new Record(l.getLevelID(),u.getId(),50, new Time(0) );

@@ -21,15 +21,21 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
@@ -37,6 +43,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Pair;
 
 public class MainWindowController extends Observable implements Initializable, IView {
 
@@ -158,7 +165,7 @@ public class MainWindowController extends Observable implements Initializable, I
 	}
 
 	private void stopTimer() {
-		
+
 		if (timer != null)
 			timer.cancel();
 
@@ -231,7 +238,7 @@ public class MainWindowController extends Observable implements Initializable, I
 
 			@Override
 			public void run() {
-				Alert alert = new Alert(AlertType.INFORMATION);
+				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("Finish Level");
 				alert.setHeaderText("Congratulations!!!");
 				try {
@@ -243,9 +250,75 @@ public class MainWindowController extends Observable implements Initializable, I
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				alert.setContentText("Steps: " + countSteps.getText() + "\n Time: " + timerText.getText());
-				alert.show();
+				alert.setContentText("Steps: " + countSteps.getText() + "\n Time: " + timerText.getText()
+						+ "\nDo you want to save your score?");
+				Optional<ButtonType> firstResult = alert.showAndWait();
 
+				if (firstResult.get() == ButtonType.OK) {
+					// Create the custom dialog
+					Dialog<Pair<String, String>> dialog = new Dialog<>();
+					dialog.setTitle("Account Dialog");
+					dialog.setHeaderText("Create Your Account");
+
+					// Set the button types
+					ButtonType submitButtonType = new ButtonType("Submit", ButtonData.OK_DONE);
+					dialog.getDialogPane().getButtonTypes().addAll(submitButtonType, ButtonType.CANCEL);
+
+					// Create the UserID and UserName labels and fields
+					GridPane grid = new GridPane();
+					grid.setHgap(10);
+					grid.setVgap(10);
+					grid.setPadding(new Insets(20, 150, 10, 10));
+
+					TextField userID = new TextField();
+					userID.setPromptText("1234");
+					TextField username = new TextField();
+					username.setPromptText("username");
+
+					grid.add(new Label("User ID:"), 0, 0);
+					grid.add(userID, 1, 0);
+					grid.add(new Label("User Name:"), 0, 1);
+					grid.add(username, 1, 1);
+
+					// Enable/Disable submit button depending on whether a
+					// UserID was entered
+					Node submitButton = dialog.getDialogPane().lookupButton(submitButtonType);
+					submitButton.setDisable(true);
+
+					// Do some validation (using the Java 8 lambda syntax)
+					userID.textProperty().addListener((observable, oldValue, newValue) -> {
+
+						submitButton.setDisable(newValue.trim().isEmpty());
+						submitButton.setDisable(oldValue.trim().isEmpty());
+					});
+
+					dialog.getDialogPane().setContent(grid);
+
+					// Request focus on the UserID field by default
+					Platform.runLater(() -> userID.requestFocus());
+
+					// Convert the result to a UserID-Username-pair when the
+					// login button is clicked.
+					dialog.setResultConverter(dialogButton -> {
+						if (dialogButton == submitButtonType) {
+							return new Pair<>(username.getText(), userID.getText());
+						}
+						return null;
+					});
+
+					Optional<Pair<String, String>> result = dialog.showAndWait();
+
+					result.ifPresent(userIdUserNme -> {
+						System.out.println(
+								"User ID = " + userIdUserNme.getValue() + ", User Name = " + userIdUserNme.getKey());
+						setChanged();
+						notifyObservers("add " + userIdUserNme.getValue() + "_" + userIdUserNme.getKey());
+
+					});
+				}
+
+				else
+					System.out.println("The user doesn't want to save his score!");
 			}
 		});
 		stopTimer();
