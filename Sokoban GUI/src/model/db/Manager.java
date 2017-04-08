@@ -1,6 +1,5 @@
 package model.db;
 
-import java.sql.ResultSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
@@ -66,13 +65,6 @@ public class Manager {
 				record=it.next();
 				System.out.println(record);
 			}
-		/*	
-			for(int i=0;i<list.size();i++){
-				Object[] row=(Object[])list.get(i);
-				for(int j=0;j<5;j++)
-					System.out.print(row[j]+" ");
-				System.out.println();	
-			}*/
 		
 		} catch (HibernateException ex) {
 			System.out.println(ex.getMessage());
@@ -82,9 +74,92 @@ public class Manager {
 		}
 	}
 	
+	public void getAllRecordsByUser(){
+		Session session = null;
+		Record record;
+		String currentLevel=null;
+		try {
+			session = factory.openSession();
+			Query query=session.createQuery("from Records as rec where rec.levelId=:levelId");
+			query.setParameter("levelId", "level4");
+			
+			List<Record>list=query.getResultList();
+			Iterator<Record>it=list.iterator();
+			
+			while(it.hasNext()){
+				record=it.next();
+				System.out.println(record);
+			}
+		
+		} catch (HibernateException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
 	
+	public void getAllRecordsByLevel(){
+		Session session = null;
+		Record record;
+		String currentLevel=null;
+		try {
+			session = factory.openSession();
+			Query query=session.createQuery("from Records as rec where rec.levelId=:levelId "+
+											"ORDER BY rec.time");
+			query.setParameter("levelId", "level4");
+			
+			List<Record>list=query.getResultList();
+			Iterator<Record>it=list.iterator();
+			
+			while(it.hasNext()){
+				record=it.next();
+				System.out.println(record);
+			}
+		
+		} catch (HibernateException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
 	
-
+	public void recordsQuery(QueryParams params){
+		Session session = null;
+		Record record=null;
+		Query query=null;
+		
+		
+		try {
+			session = factory.openSession();
+			if(params.getLevelId()!=null){
+				query=session.createQuery("from Records as rec where rec.levelId=:levelId "+
+										  "ORDER BY rec."+params.getOrderBy());
+				query.setParameter("levelId", params.getLevelId());
+			}
+			else if(params.getUserName()!=null){
+				query=session.createQuery("from Records as rec where rec.userName=:userName "+
+										  "ORDER BY rec."+params.getOrderBy());
+				query.setParameter("userName", params.getUserName());
+			}
+			
+			List<Record>list=query.getResultList();
+			Iterator<Record>it=list.iterator();
+			
+			while(it.hasNext()){
+				record=it.next();
+				System.out.println(record);
+			}
+		
+		} catch (HibernateException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+	
 	public void close() {
 		factory.close();
 	}

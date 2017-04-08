@@ -10,21 +10,27 @@ public class test {
 	public static void main(String[] args) {
 		
 		Manager m=Manager.getInstance();
-		User u=new User("Tomer124");
+		QueryParams params=new QueryParams("level4", null, "time");
+		m.recordsQuery(params);
+		//m.getAllRecords();
+		//m.getAllRecordsByLevel();
+		
+		/*User u=new User("yarden4");
 		m.add(u);
 		
 		Level l=new Level();
-		l.setLevelID("level2");
+		l.setLevelID("level4");
 		m.add(l);
 		Record r=new Record(l.getLevelID(), u.getName(), 60, new Time (System.currentTimeMillis()));
 		//Record rec = new Record(l.getLevelID(),u.getId(),50, new Time(0) );
 		m.add(r);
 		
-		m.getAllRecords();
 		
-		/*Record r=new Record("level1", "yardi", 5, new Time(0));
-		RecordDBManager rm=new RecordDBManager();
-		rm.add(r);*/
+		
+		Record r=new Record("level4", "yarden4", 40, new Time(System.currentTimeMillis()));
+		m.add(r);
+		r=new Record("level4", "yarden4", 50, new Time(System.currentTimeMillis()));
+		m.add(r);*/
 	}
 
 }
