@@ -20,8 +20,8 @@ public class Record {
 	@Column(name="LevelID")
 	private String levelId;
 	
-	@Column(name="UserID")
-	private String userId;
+	@Column(name="UserName")
+	private String userName;
 	
 	@Column(name="Steps")
 	private int steps;
@@ -32,9 +32,9 @@ public class Record {
 	public Record() {
 	}
 
-	public Record(String levelId, String userId, int steps, Time time) {
+	public Record(String levelId, String userName, int steps, Time time) {
 		this.levelId = levelId;
-		this.userId = userId;
+		this.userName = userName;
 		this.steps = steps;
 		this.time = time;
 	}
@@ -55,12 +55,12 @@ public class Record {
 		this.levelId = levelId;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public int getSteps() {
@@ -81,7 +81,7 @@ public class Record {
 
 	@Override
 	public String toString() {
-		return "Record [recordId=" + recordId + ", levelId=" + levelId + ", userId=" + userId + ", steps=" + steps
+		return "Record [recordId=" + recordId + ", levelId=" + levelId + ", userName=" + userName + ", steps=" + steps
 				+ ", time=" + time + "]";
 	}
 	

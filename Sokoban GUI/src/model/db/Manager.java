@@ -1,5 +1,6 @@
 package model.db;
 
+import java.sql.ResultSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
@@ -59,13 +60,19 @@ public class Manager {
 			session = factory.openSession();
 			Query query=session.createQuery("from Records");
 			List<Record>list=query.getResultList();
-			Iterator<Record> it=list.iterator();
+			Iterator<Record>it=list.iterator();
 			
 			while(it.hasNext()){
 				record=it.next();
-				System.out.println(record.toString());
-				
+				System.out.println(record);
 			}
+		/*	
+			for(int i=0;i<list.size();i++){
+				Object[] row=(Object[])list.get(i);
+				for(int j=0;j<5;j++)
+					System.out.print(row[j]+" ");
+				System.out.println();	
+			}*/
 		
 		} catch (HibernateException ex) {
 			System.out.println(ex.getMessage());
@@ -74,6 +81,8 @@ public class Manager {
 				session.close();
 		}
 	}
+	
+	
 	
 
 	public void close() {
