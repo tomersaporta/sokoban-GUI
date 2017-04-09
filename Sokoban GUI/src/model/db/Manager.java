@@ -51,85 +51,12 @@ public class Manager {
 				session.close();
 		}
 	}
-	
-	public void getAllRecords(){
-		Session session = null;
-		Record record;
-		try {
-			session = factory.openSession();
-			Query query=session.createQuery("from Records");
-			List<Record>list=query.getResultList();
-			Iterator<Record>it=list.iterator();
-			
-			while(it.hasNext()){
-				record=it.next();
-				System.out.println(record);
-			}
-		
-		} catch (HibernateException ex) {
-			System.out.println(ex.getMessage());
-		} finally {
-			if (session != null)
-				session.close();
-		}
-	}
-	
-	public void getAllRecordsByUser(){
-		Session session = null;
-		Record record;
-		String currentLevel=null;
-		try {
-			session = factory.openSession();
-			Query query=session.createQuery("from Records as rec where rec.levelId=:levelId");
-			query.setParameter("levelId", "level4");
-			
-			List<Record>list=query.getResultList();
-			Iterator<Record>it=list.iterator();
-			
-			while(it.hasNext()){
-				record=it.next();
-				System.out.println(record);
-			}
-		
-		} catch (HibernateException ex) {
-			System.out.println(ex.getMessage());
-		} finally {
-			if (session != null)
-				session.close();
-		}
-	}
-	
-	public void getAllRecordsByLevel(){
-		Session session = null;
-		Record record;
-		String currentLevel=null;
-		try {
-			session = factory.openSession();
-			Query query=session.createQuery("from Records as rec where rec.levelId=:levelId "+
-											"ORDER BY rec.time");
-			query.setParameter("levelId", "level4");
-			
-			List<Record>list=query.getResultList();
-			Iterator<Record>it=list.iterator();
-			
-			while(it.hasNext()){
-				record=it.next();
-				System.out.println(record);
-			}
-		
-		} catch (HibernateException ex) {
-			System.out.println(ex.getMessage());
-		} finally {
-			if (session != null)
-				session.close();
-		}
-	}
-	
-	public void recordsQuery(QueryParams params){
+
+	public List<Record> recordsQuery(QueryParams params){
 		Session session = null;
 		Record record=null;
 		Query query=null;
-		
+		List<Record>list=null;
 		
 		try {
 			session = factory.openSession();
@@ -144,20 +71,22 @@ public class Manager {
 				query.setParameter("userName", params.getUserName());
 			}
 			
-			List<Record>list=query.getResultList();
+			list=query.getResultList();
 			Iterator<Record>it=list.iterator();
 			
 			while(it.hasNext()){
 				record=it.next();
 				System.out.println(record);
 			}
-		
+			
 		} catch (HibernateException ex) {
 			System.out.println(ex.getMessage());
 		} finally {
 			if (session != null)
 				session.close();
 		}
+		return list;
+	
 	}
 	
 	public void close() {

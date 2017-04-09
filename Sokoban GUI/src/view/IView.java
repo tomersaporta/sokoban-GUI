@@ -16,5 +16,5 @@ public interface IView {
 	
 	public void displayError(String error);
 
-	
+	public void setSecondStage(Stage secondStage);
 }

@@ -10,7 +10,7 @@ public class test {
 	public static void main(String[] args) {
 		
 		Manager m=Manager.getInstance();
-		QueryParams params=new QueryParams("level4", null, "time");
+		QueryParams params=new QueryParams("level4", null, "steps");
 		m.recordsQuery(params);
 		//m.getAllRecords();
 		//m.getAllRecordsByLevel();

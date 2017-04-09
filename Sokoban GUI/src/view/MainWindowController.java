@@ -67,6 +67,7 @@ public class MainWindowController extends Observable implements Initializable, I
 
 	// Stage
 	private Stage primaryStage;
+	private Stage secondStage;
 
 	// Sound
 	@FXML
@@ -378,6 +379,11 @@ public class MainWindowController extends Observable implements Initializable, I
 			}
 		});
 	}
+	
+	public void openRecordsWin(){
+		this.secondStage.show();
+	}
+	
 
 	// set the focus on the sokobanDisplayer
 	private void setFocus() {
@@ -442,5 +448,11 @@ public class MainWindowController extends Observable implements Initializable, I
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public void setSecondStage(Stage secondStage) {
+		this.secondStage = secondStage;
+		
 	}
 }

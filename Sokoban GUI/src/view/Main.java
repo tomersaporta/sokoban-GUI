@@ -7,6 +7,7 @@ import controller.server.SokobanClientHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.MyModel;
@@ -55,11 +56,24 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("SOKOBAN");
+			
+			Stage secondStage = new Stage();
+			AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("Sample.fxml"));
+			Scene secondScene = new Scene(pane,600,600);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			secondStage.setScene(secondScene);
+			secondStage.setTitle("High Records");
+			view.setSecondStage(secondStage);
+			
 			primaryStage.show();
+
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		
+		
 		
 	}
 	
