@@ -1,4 +1,4 @@
-package model.db;
+package commons;
 
 import java.sql.Time;
 

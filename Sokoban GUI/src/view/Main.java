@@ -32,6 +32,7 @@ public class Main extends Application {
 			SokobanController theController;
 			
 			
+			
 			//get the args from the main
 			
 			List<String>args=getParameters().getRaw();
@@ -48,8 +49,10 @@ public class Main extends Application {
 			else//without server
 				theController= new SokobanController(view, model);
 			
+			//connect the observers and observable
 			model.addObserver(theController);
 			view.addObserver(theController);
+			
 			view.setPrimaryStage(primaryStage);
 			
 			Scene scene = new Scene(root,700,600);
@@ -57,8 +60,17 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("SOKOBAN");
 			
+			//records
 			Stage secondStage = new Stage();
-			AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("Sample.fxml"));
+			
+			FXMLLoader loaderRec=new FXMLLoader(getClass().getResource("RecordsWindow.fxml"));
+			//AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("RecordsWindow.fxml"));
+			AnchorPane pane = (AnchorPane)loaderRec.load();
+			RecordsWindowController recordsView=loaderRec.getController();
+			
+			recordsView.addObserver(view);
+			view.setRecordsWindow(recordsView);
+			
 			Scene secondScene = new Scene(pane,600,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			secondStage.setScene(secondScene);

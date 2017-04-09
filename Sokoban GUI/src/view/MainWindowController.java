@@ -6,13 +6,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import commons.Level;
+import commons.Record;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -45,7 +48,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Pair;
 
-public class MainWindowController extends Observable implements Initializable, IView {
+public class MainWindowController extends Observable implements Initializable, IView,Observer {
 
 	@FXML
 	private SokobanDisplayer sokobanDisplayer;
@@ -68,6 +71,9 @@ public class MainWindowController extends Observable implements Initializable, I
 	// Stage
 	private Stage primaryStage;
 	private Stage secondStage;
+	
+	//records
+	private RecordsWindowController recordsWindow;
 
 	// Sound
 	@FXML
@@ -93,6 +99,11 @@ public class MainWindowController extends Observable implements Initializable, I
 		this.isMusicOn = true;
 	}
 
+	
+	public void setRecordsWindow(RecordsWindowController recordsWindow){
+		this.recordsWindow=recordsWindow;
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -454,5 +465,19 @@ public class MainWindowController extends Observable implements Initializable, I
 	public void setSecondStage(Stage secondStage) {
 		this.secondStage = secondStage;
 		
+	}
+	
+
+	@Override
+	public void update(Observable o, Object arg) {
+		System.out.println("update");
+		setChanged();
+		notifyObservers(arg);
+	}
+
+
+	@Override
+	public void showRecords(List<Record> records) {
+		this.recordsWindow.showRecordsTable(records);
 	}
 }

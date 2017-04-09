@@ -9,8 +9,8 @@ public class test {
 
 	public static void main(String[] args) {
 		
-		Manager m=Manager.getInstance();
-		QueryParams params=new QueryParams("level4", null, "steps");
+		DbManager m=DbManager.getInstance();
+		QueryParams params=new QueryParams(null, null, "steps");
 		m.recordsQuery(params);
 		//m.getAllRecords();
 		//m.getAllRecordsByLevel();

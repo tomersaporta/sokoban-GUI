@@ -13,7 +13,7 @@
 		</property>
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
-		<mapping class="model.db.Record"></mapping>
+		<mapping class="commons.Record"></mapping>
 		<mapping class="model.db.User"></mapping>
 		<mapping class="commons.Level"></mapping>
 		

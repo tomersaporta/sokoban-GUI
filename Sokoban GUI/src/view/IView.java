@@ -1,6 +1,9 @@
 package view;
 
+import java.util.List;
+
 import commons.Level;
+import commons.Record;
 import javafx.beans.property.StringProperty;
 import javafx.stage.Stage;
 
@@ -17,4 +20,6 @@ public interface IView {
 	public void displayError(String error);
 
 	public void setSecondStage(Stage secondStage);
+	
+	public void showRecords(List<Record> records);
 }

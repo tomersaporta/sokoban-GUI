@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="613.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="613.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RecordsWindowController">
    <children>
       <TableView layoutX="-3.0" layoutY="130.0" prefHeight="324.0" prefWidth="613.0">
         <columns>
@@ -25,7 +25,7 @@
       <MenuButton fx:id="SearchByButton" layoutX="239.0" layoutY="82.0" mnemonicParsing="false" text="Search By:">
         <items>
           <MenuItem mnemonicParsing="false" text="Level" />
-          <MenuItem mnemonicParsing="false" text="User Name" />
+          <MenuItem  mnemonicParsing="false" text="User Name" />
         </items>
       </MenuButton>
       <TextField fx:id="TextFieldSerach" layoutX="74.0" layoutY="82.0" promptText="User Name / Level" />
@@ -42,6 +42,6 @@
         </items>
       </MenuButton>
       <Button layoutX="508.0" layoutY="471.0" mnemonicParsing="false" text="Next -&gt;" />
-      <Button layoutX="437.0" layoutY="471.0" mnemonicParsing="false" text="&lt;-Prev" />
+      <Button layoutX="437.0" layoutY="471.0" onAction="#search" mnemonicParsing="false" text="&lt;-Prev" />
    </children>
 </AnchorPane>

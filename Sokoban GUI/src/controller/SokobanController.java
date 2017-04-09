@@ -11,7 +11,9 @@ import controller.commands.ExitCommand;
 import controller.commands.ICommand;
 import controller.commands.LoadLevelCommand;
 import controller.commands.MoveCommand;
+import controller.commands.QueryCommand;
 import controller.commands.SaveLevelCommand;
+import controller.commands.ShowRecordsCommand;
 import controller.server.MyServer;
 import controller.server.SokobanClientHandler;
 import javafx.beans.property.SimpleStringProperty;
@@ -94,6 +96,8 @@ public class SokobanController implements Observer{
 		this.commandsCreator.put("EXIT", new ExitCommand(this.controller, this.theServer));
 		this.commandsCreator.put("CHANGED", new DisplayGUICommand(this.model,this.ui));
 		this.commandsCreator.put("ERROR", new ErrorCommand(this.ui,this.clientHandler));
+		this.commandsCreator.put("QUERY", new QueryCommand(this.model));
+		this.commandsCreator.put("SHOWQUERYRESULTS", new ShowRecordsCommand(this.ui, this.model) );
 	}
 	
 	private String[] objectToStringArray(Object obj){

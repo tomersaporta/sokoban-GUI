@@ -12,17 +12,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import commons.Record;
 
-public class Manager {
-	private static Manager instance = new Manager();
 
-	public static Manager getInstance() {
+public class DbManager {
+	private static DbManager instance = new DbManager();
+
+	public static DbManager getInstance() {
 		return instance;
 	}
 
 	private SessionFactory factory;
 
-	private Manager() {
+	private DbManager() {
 		// to show the severe msg
 		Logger.getLogger("org.hibernate").setLevel(java.util.logging.Level.SEVERE);
 
@@ -60,16 +62,26 @@ public class Manager {
 		
 		try {
 			session = factory.openSession();
-			if(params.getLevelId()!=null){
+			System.out.println(params.getLevelId().isEmpty());
+			System.out.println(params.getUserName().isEmpty());
+			System.out.println(params.getOrderBy());
+			if(params.getLevelId().equals("null")&&params.getUserName().equals("null")){
+				System.out.println("yyyyy");
+				query=session.createQuery("from Records as rec ORDER BY rec."+params.getOrderBy());
+			}
+			else if(!params.getLevelId().equals("null")){
+				System.out.println("ssss");
 				query=session.createQuery("from Records as rec where rec.levelId=:levelId "+
 										  "ORDER BY rec."+params.getOrderBy());
 				query.setParameter("levelId", params.getLevelId());
 			}
-			else if(params.getUserName()!=null){
+			else if(!params.getUserName().equals("null")){
+				System.out.println("tttt");
 				query=session.createQuery("from Records as rec where rec.userName=:userName "+
 										  "ORDER BY rec."+params.getOrderBy());
 				query.setParameter("userName", params.getUserName());
 			}
+			
 			
 			list=query.getResultList();
 			Iterator<Record>it=list.iterator();

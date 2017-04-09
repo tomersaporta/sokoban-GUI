@@ -7,7 +7,6 @@ public abstract class Command implements ICommand {
 	public String getParams() {
 		return params;
 	}
-
 	
 	/**
 	 * Initialize the parameters necessary for the receiver
