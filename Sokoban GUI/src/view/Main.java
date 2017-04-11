@@ -63,7 +63,7 @@ public class Main extends Application {
 			//records
 			Stage secondStage = new Stage();
 			
-			FXMLLoader loaderRec=new FXMLLoader(getClass().getResource("RecordsWindow.fxml"));
+			FXMLLoader loaderRec=new FXMLLoader(getClass().getResource("NewRecords.fxml"));
 			//AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("RecordsWindow.fxml"));
 			AnchorPane pane = (AnchorPane)loaderRec.load();
 			RecordsWindowController recordsView=loaderRec.getController();

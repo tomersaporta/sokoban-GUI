@@ -86,12 +86,16 @@ public class MainWindowController extends Observable implements Initializable, I
 	@FXML
 	private Label status;
 
+	
+	private boolean isLevelCompleted;
+	
 	public MainWindowController() {
 
 		this.viewSettings = initViewSettings("./resources/viewSettings/viewSettings.xml");
 		this.secCount = 0;
 		this.minCount = 0;
 		this.loadFromGui = false;
+		this.isLevelCompleted=false;
 
 		this.musicFile = "./resources/music/song1.mp3";
 		this.sound = new Media(new File(musicFile).toURI().toString());
@@ -192,6 +196,7 @@ public class MainWindowController extends Observable implements Initializable, I
 	// GUI CODE
 	public void openFile() {
 
+		
 		FileChooser fc = new FileChooser();
 		fc.setTitle("Open level file");
 		fc.setInitialDirectory(new File("./resources/levels"));
@@ -207,6 +212,7 @@ public class MainWindowController extends Observable implements Initializable, I
 			notifyObservers("load " + choosen.getPath());
 		}
 		this.loadFromGui = true;
+		this.isLevelCompleted=false;
 		stopTimer();
 		initTimer(0, 0);
 
@@ -234,6 +240,7 @@ public class MainWindowController extends Observable implements Initializable, I
 	public void displayGUI(Level level) {
 
 		sokobanDisplayer.setLevelData(level.getLevelBored());
+		recordsWindow.setLevelParam(level.getLevelID());
 
 		if (this.loadFromGui == false) {
 			initTimer(0, 0);
@@ -246,6 +253,8 @@ public class MainWindowController extends Observable implements Initializable, I
 	}
 
 	public void finishLevel() {
+		if(this.isLevelCompleted == true)
+			return;
 		Platform.runLater(new Runnable() {
 
 			@Override
@@ -267,10 +276,13 @@ public class MainWindowController extends Observable implements Initializable, I
 				Optional<ButtonType> firstResult = alert.showAndWait();
 
 				if (firstResult.get() == ButtonType.OK) {
+					isLevelCompleted = true;
+					
 					// Create the custom dialog
 					Dialog<Pair<String, String>> dialog = new Dialog<>();
 					dialog.setTitle("Account Dialog");
 					dialog.setHeaderText("Create Your Account");
+				
 
 					// Set the button types
 					ButtonType submitButtonType = new ButtonType("Submit", ButtonData.OK_DONE);
@@ -284,13 +296,13 @@ public class MainWindowController extends Observable implements Initializable, I
 
 					TextField userID = new TextField();
 					userID.setPromptText("1234");
-					TextField username = new TextField();
-					username.setPromptText("username");
+					//TextField username = new TextField();
+					//username.setPromptText("username");
 
 					grid.add(new Label("User ID:"), 0, 0);
 					grid.add(userID, 1, 0);
-					grid.add(new Label("User Name:"), 0, 1);
-					grid.add(username, 1, 1);
+					//grid.add(new Label("User Name:"), 0, 1);
+					//grid.add(username, 1, 1);
 
 					// Enable/Disable submit button depending on whether a
 					// UserID was entered
@@ -313,19 +325,20 @@ public class MainWindowController extends Observable implements Initializable, I
 					// login button is clicked.
 					dialog.setResultConverter(dialogButton -> {
 						if (dialogButton == submitButtonType) {
-							return new Pair<>(username.getText(), userID.getText());
+							return new Pair<>(null, userID.getText());
 						}
 						return null;
 					});
 
 					Optional<Pair<String, String>> result = dialog.showAndWait();
 
-					result.ifPresent(userIdUserNme -> {
-						System.out.println(
-								"User ID = " + userIdUserNme.getValue() + ", User Name = " + userIdUserNme.getKey());
+					result.ifPresent(user -> {
 						setChanged();
-						notifyObservers("add " + userIdUserNme.getValue() + "_" + userIdUserNme.getKey());
-
+						notifyObservers("addUser " + user.getValue());
+						System.out.println("addRecord "+user.getValue() + " " + timerCount.getValue());
+						setChanged();
+						notifyObservers("addRecord "+user.getValue() + " " + timerCount.getValue());
+						
 					});
 				}
 
@@ -392,7 +405,10 @@ public class MainWindowController extends Observable implements Initializable, I
 	}
 	
 	public void openRecordsWin(){
+		this.recordsWindow.initParams();
+		this.recordsWindow.search();
 		this.secondStage.show();
+		
 	}
 	
 
@@ -478,6 +494,6 @@ public class MainWindowController extends Observable implements Initializable, I
 
 	@Override
 	public void showRecords(List<Record> records) {
-		this.recordsWindow.showRecordsTable(records);
+		this.recordsWindow.showRecordsTable(records,this.secondStage);
 	}
 }

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import controller.commands.AddRecordCommand;
+import controller.commands.AddUserCommand;
 import controller.commands.DisplayCLICommand;
 import controller.commands.DisplayGUICommand;
 import controller.commands.ErrorCommand;
@@ -98,6 +100,8 @@ public class SokobanController implements Observer{
 		this.commandsCreator.put("ERROR", new ErrorCommand(this.ui,this.clientHandler));
 		this.commandsCreator.put("QUERY", new QueryCommand(this.model));
 		this.commandsCreator.put("SHOWQUERYRESULTS", new ShowRecordsCommand(this.ui, this.model) );
+		this.commandsCreator.put("ADDUSER", new AddUserCommand(this.model));
+		this.commandsCreator.put("ADDRECORD", new AddRecordCommand(this.model));
 	}
 	
 	private String[] objectToStringArray(Object obj){

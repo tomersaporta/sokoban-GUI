@@ -14,5 +14,7 @@ public interface IModel {
 	public int getSteps();
 	public List<Record> getRecordsList();
 	public void dbQuery(String params);
+	public void addUser(String userName);
+	public void addRecord(String recordValues);
 
 }

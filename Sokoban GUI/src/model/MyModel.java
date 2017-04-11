@@ -15,6 +15,7 @@ import model.data.handle.LevelSaver;
 import model.data.handle.LevelSaverFactory;
 import model.db.DbManager;
 import model.db.QueryParams;
+import model.db.User;
 import model.policy.ISokobanPolicy;
 import model.policy.MySokobanPolicy;
 import model.policy.moveType.IMoveType;
@@ -75,6 +76,8 @@ public class MyModel extends Observable implements IModel {
 					setTheLevel(levelLoader.loadLevel(new FileInputStream(new File(filepath))));
 					setChanged();
 					notifyObservers("changed");
+					if(!dbManager.isLevelExistInTable(theLevel.getLevelID()))
+						dbManager.add(theLevel);
 					
 				} catch (ClassNotFoundException | IOException e) {//file not found
 					setChanged();
@@ -176,5 +179,19 @@ public class MyModel extends Observable implements IModel {
 			}
 		});
 		t.start();
+	}
+
+	@Override
+	public void addUser(String userName) {
+		if(!dbManager.isUserExistInTable(userName)){
+			dbManager.add(new User(userName));
+		}
+	}
+
+	@Override
+	public void addRecord(String recordValues) {
+		String [] s=recordValues.split(" ");
+		Record r=new Record(this.theLevel.getLevelID(), s[0], this.theLevel.getSteps(), s[1]);
+		dbManager.add(r);
 	}
 }

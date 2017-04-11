@@ -12,8 +12,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import commons.Level;
 import commons.Record;
-
 
 public class DbManager {
 	private static DbManager instance = new DbManager();
@@ -54,43 +54,44 @@ public class DbManager {
 		}
 	}
 
-	public List<Record> recordsQuery(QueryParams params){
+	public List<Record> recordsQuery(QueryParams params) {
 		Session session = null;
-		Record record=null;
-		Query query=null;
-		List<Record>list=null;
-		
+		Record record = null;
+		Query query = null;
+		List<Record> list = null;
+
 		try {
 			session = factory.openSession();
-			System.out.println(params.getLevelId().isEmpty());
-			System.out.println(params.getUserName().isEmpty());
-			System.out.println(params.getOrderBy());
-			if(params.getLevelId().equals("null")&&params.getUserName().equals("null")){
+			if (params.getLevelId().equals("") && params.getUserName().equals("")) {
 				System.out.println("yyyyy");
-				query=session.createQuery("from Records as rec ORDER BY rec."+params.getOrderBy());
-			}
-			else if(!params.getLevelId().equals("null")){
-				System.out.println("ssss");
-				query=session.createQuery("from Records as rec where rec.levelId=:levelId "+
-										  "ORDER BY rec."+params.getOrderBy());
+				query = session.createQuery("from Records as rec ORDER BY rec." + params.getOrderBy());
+			} else if (!(params.getLevelId().equals("")) && !(params.getUserName().equals(""))) {
+				System.out.println("both");
+				query = session.createQuery("from Records as rec where rec.levelId=:levelId "
+						+ "and rec.userName=:userName ORDER BY rec." + params.getOrderBy());
 				query.setParameter("levelId", params.getLevelId());
-			}
-			else if(!params.getUserName().equals("null")){
+				query.setParameter("userName", params.getUserName());
+			} else if (!params.getLevelId().equals("")) {
+				System.out.println("ssss");
+				query = session.createQuery(
+						"from Records as rec where rec.levelId=:levelId " + "ORDER BY rec." + params.getOrderBy());
+				query.setParameter("levelId", params.getLevelId());
+			} else if (!params.getUserName().equals("")) {
 				System.out.println("tttt");
-				query=session.createQuery("from Records as rec where rec.userName=:userName "+
-										  "ORDER BY rec."+params.getOrderBy());
+				query = session.createQuery(
+						"from Records as rec where rec.userName=:userName " + "ORDER BY rec." + params.getOrderBy());
 				query.setParameter("userName", params.getUserName());
 			}
-			
-			
-			list=query.getResultList();
-			Iterator<Record>it=list.iterator();
-			
-			while(it.hasNext()){
-				record=it.next();
+
+			query.setMaxResults(15);
+			list = query.getResultList();
+			Iterator<Record> it = list.iterator();
+
+			while (it.hasNext()) {
+				record = it.next();
 				System.out.println(record);
 			}
-			
+
 		} catch (HibernateException ex) {
 			System.out.println(ex.getMessage());
 		} finally {
@@ -98,9 +99,56 @@ public class DbManager {
 				session.close();
 		}
 		return list;
-	
+
+	}
+
+	public boolean isLevelExistInTable(String levelId) {
+		Session session = null;
+		Query query = null;
+		List<Level> list = null;
+		try {
+			session = factory.openSession();
+			query = session.createQuery("from Levels as l where l.levelID=:levelID");
+			query.setParameter("levelID", levelId);
+
+			list = query.getResultList();
+			if (list.size() > 0)
+				return true;
+
+		} catch (HibernateException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+
+		return false;
+	}
+	public boolean isUserExistInTable(String userName) {
+		Session session = null;
+		Query query = null;
+		List<User> list = null;
+		try {
+			session = factory.openSession();
+			query = session.createQuery("from Users as u where u.name=:name");
+			query.setParameter("name", userName);
+
+			list = query.getResultList();
+			if (list.size() > 0)
+				return true;
+
+		} catch (HibernateException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+
+		return false;
 	}
 	
+	
+
 	public void close() {
 		factory.close();
 	}

@@ -27,12 +27,12 @@ public class Record {
 	private int steps;
 	
 	@Column(name="LevelTime")
-	private Time time;
+	private String time;
 	
 	public Record() {
 	}
 
-	public Record(String levelId, String userName, int steps, Time time) {
+	public Record(String levelId, String userName, int steps, String time) {
 		this.levelId = levelId;
 		this.userName = userName;
 		this.steps = steps;
@@ -71,11 +71,11 @@ public class Record {
 		this.steps = steps;
 	}
 
-	public Time getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(Time time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
