@@ -71,7 +71,7 @@ public class Main extends Application {
 			recordsView.addObserver(view);
 			view.setRecordsWindow(recordsView);
 			
-			Scene secondScene = new Scene(pane,600,600);
+			Scene secondScene = new Scene(pane,650,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			secondStage.setScene(secondScene);
 			secondStage.setTitle("High Records");

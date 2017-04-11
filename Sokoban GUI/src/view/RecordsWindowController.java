@@ -12,11 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,9 +21,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class RecordsWindowController extends Observable implements Initializable{
 	
@@ -59,12 +54,19 @@ public class RecordsWindowController extends Observable implements Initializable
 	private String levelParam;
 	private String orderByParam;
 	
+	private String currentLevelID;
+	
+	private Stage stage;
+	
 	
 	public RecordsWindowController() {
+		this.currentLevelID=null;
 		initParams();
+		
 	}
 	
 	public void initParams(){
+		
 		this.orderByParam="steps";
 		this.userParam="";
 		this.levelParam="";	
@@ -77,26 +79,40 @@ public class RecordsWindowController extends Observable implements Initializable
 	public void setLevelParam(String levelParam) {
 		this.levelParam = levelParam;
 	}
+	
+	public String getCurrentLevelID() {
+		return currentLevelID;
+	}
+
+	public void setCurrentLevelID(String currentLevelID) {
+		this.currentLevelID = currentLevelID;
+	}
 
 	@SuppressWarnings("unchecked")
 	public void showRecordsTable(List<Record> records, Stage stage){
 		
+		this.stage=stage;
 		convertRecordToRecordRow(records);
 		
 		this.recordId=new TableColumn<RecordRow, Integer>("Record ID");
 		this.recordId.setCellValueFactory(new PropertyValueFactory<RecordRow, Integer>("recordId"));
+		this.recordId.setPrefWidth(120);
 		
 		this.levelId=new TableColumn<RecordRow, String>("Level");
 		this.levelId.setCellValueFactory(new PropertyValueFactory<RecordRow, String>("levelId"));
+		this.levelId.setPrefWidth(120);
 		
 		this.userName=new TableColumn<RecordRow, String>("User Name");
 		this.userName.setCellValueFactory(new PropertyValueFactory<RecordRow, String>("userName"));
+		this.userName.setPrefWidth(120);
 		
 		this.steps=new TableColumn<RecordRow, Integer>("Steps");
 		this.steps.setCellValueFactory(new PropertyValueFactory<RecordRow, Integer>("steps"));
+		this.steps.setPrefWidth(120);
 		
 		this.time=new TableColumn<RecordRow, String>("Time");
 		this.time.setCellValueFactory(new PropertyValueFactory<RecordRow, String>("time"));
+		this.time.setPrefWidth(120);
 		
 		this.recordTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -105,33 +121,7 @@ public class RecordsWindowController extends Observable implements Initializable
 				RecordRow r=recordTable.getSelectionModel().getSelectedItem();
 				userParam=r.getUserName();
 				search();
-				
-				TableView<RecordRow> userTable=new TableView<RecordRow>();
 
-				userTable.setItems(data);
-				userTable.getColumns().addAll(recordId, levelId, userName,steps,time);
-		 
-				Scene scene = new Scene(new Group());
-				Stage s=new Stage();
-				
-		        s.setTitle("User Records");
-		        s.setWidth(450);
-		        s.setHeight(550);
-				
-//				final Label label = new Label("User Records");
-////		    label.setFont(new Font("Arial", 20));
-//				
-//		        final VBox vbox = new VBox();
-//		        vbox.setSpacing(5);
-//		        vbox.setPadding(new Insets(10, 0, 0, 10));
-//		        vbox.getChildren().addAll(label, userTable);
-		 
-		        ((Group) scene.getRoot()).getChildren().addAll(userTable);
-		 
-		        s.setScene(scene);
-		        s.show();
-		        
-				
 			}
 		});
 		
@@ -145,10 +135,14 @@ public class RecordsWindowController extends Observable implements Initializable
 			}
 		});
 
-		
+		exitStage();
 	}
 
 	public void search(){
+		System.out.println(this.currentLevelID);
+		if(this.currentLevelID!=null){
+			this.levelParam=this.currentLevelID;
+		}
 		setChanged();
 		System.out.println("Query "+this.levelParam+" "+this.userParam+" "+this.orderByParam);
 		notifyObservers("Query "+this.levelParam+" "+this.userParam+" "+this.orderByParam);
@@ -180,8 +174,20 @@ public class RecordsWindowController extends Observable implements Initializable
 		}
 	}
 	
-	public void showUserRecordsTable(){
-		
+	public void refresh(){
+		initParams();
+		search();
+	}
+	
+	public void exitStage() {
+		this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+			@Override
+			public void handle(WindowEvent event) {
+				System.out.println("redX");
+				refresh();
+			}
+		});
 	}
 	
 }

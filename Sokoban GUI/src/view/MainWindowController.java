@@ -240,7 +240,8 @@ public class MainWindowController extends Observable implements Initializable, I
 	public void displayGUI(Level level) {
 
 		sokobanDisplayer.setLevelData(level.getLevelBored());
-		recordsWindow.setLevelParam(level.getLevelID());
+		recordsWindow.setCurrentLevelID(level.getLevelID());
+		//recordsWindow.setLevelParam(level.getLevelID());
 
 		if (this.loadFromGui == false) {
 			initTimer(0, 0);
@@ -405,7 +406,6 @@ public class MainWindowController extends Observable implements Initializable, I
 	}
 	
 	public void openRecordsWin(){
-		this.recordsWindow.initParams();
 		this.recordsWindow.search();
 		this.secondStage.show();
 		
