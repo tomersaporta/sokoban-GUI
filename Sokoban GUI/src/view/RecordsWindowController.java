@@ -140,9 +140,9 @@ public class RecordsWindowController extends Observable implements Initializable
 
 	public void search(){
 		System.out.println(this.currentLevelID);
-		if(this.currentLevelID!=null){
+		/*if(this.currentLevelID!=null){
 			this.levelParam=this.currentLevelID;
-		}
+		}*/
 		setChanged();
 		System.out.println("Query "+this.levelParam+" "+this.userParam+" "+this.orderByParam);
 		notifyObservers("Query "+this.levelParam+" "+this.userParam+" "+this.orderByParam);
@@ -155,7 +155,7 @@ public class RecordsWindowController extends Observable implements Initializable
 	}
 	
 	public void orderParams(){
-		//tomer said:
+		//Tomer said:
 		RadioButton rb=(RadioButton)group.getSelectedToggle();
 		this.orderByParam=rb.getText();
 	}

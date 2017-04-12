@@ -86,8 +86,8 @@ public class MainWindowController extends Observable implements Initializable, I
 	@FXML
 	private Label status;
 
-	
 	private boolean isLevelCompleted;
+	private String currentLevelId;
 	
 	public MainWindowController() {
 
@@ -101,6 +101,7 @@ public class MainWindowController extends Observable implements Initializable, I
 		this.sound = new Media(new File(musicFile).toURI().toString());
 		this.mediaPlayer = new MediaPlayer(sound);
 		this.isMusicOn = true;
+		this.currentLevelId="";
 	}
 
 	
@@ -239,6 +240,7 @@ public class MainWindowController extends Observable implements Initializable, I
 	@Override
 	public void displayGUI(Level level) {
 
+		this.currentLevelId=level.getLevelID();
 		sokobanDisplayer.setLevelData(level.getLevelBored());
 		recordsWindow.setCurrentLevelID(level.getLevelID());
 		//recordsWindow.setLevelParam(level.getLevelID());
@@ -406,6 +408,8 @@ public class MainWindowController extends Observable implements Initializable, I
 	}
 	
 	public void openRecordsWin(){
+		if(this.currentLevelId!="")
+			this.recordsWindow.setLevelParam(this.currentLevelId);
 		this.recordsWindow.search();
 		this.secondStage.show();
 		

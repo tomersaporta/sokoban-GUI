@@ -10,3 +10,8 @@
 	-fx-background-image: url("../../resources/elements/bbb.jpg");
 	-fx-background-size: 160.0% 
 }
+.records
+{
+	-fx-background-image: url("../../resources/elements/bbb2.jpg");
+	-fx-background-size: 160.0% 	
+}

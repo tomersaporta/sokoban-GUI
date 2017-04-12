@@ -63,21 +63,17 @@ public class DbManager {
 		try {
 			session = factory.openSession();
 			if (params.getLevelId().equals("") && params.getUserName().equals("")) {
-				System.out.println("yyyyy");
 				query = session.createQuery("from Records as rec ORDER BY rec." + params.getOrderBy());
 			} else if (!(params.getLevelId().equals("")) && !(params.getUserName().equals(""))) {
-				System.out.println("both");
 				query = session.createQuery("from Records as rec where rec.levelId=:levelId "
 						+ "and rec.userName=:userName ORDER BY rec." + params.getOrderBy());
 				query.setParameter("levelId", params.getLevelId());
 				query.setParameter("userName", params.getUserName());
 			} else if (!params.getLevelId().equals("")) {
-				System.out.println("ssss");
 				query = session.createQuery(
 						"from Records as rec where rec.levelId=:levelId " + "ORDER BY rec." + params.getOrderBy());
 				query.setParameter("levelId", params.getLevelId());
 			} else if (!params.getUserName().equals("")) {
-				System.out.println("tttt");
 				query = session.createQuery(
 						"from Records as rec where rec.userName=:userName " + "ORDER BY rec." + params.getOrderBy());
 				query.setParameter("userName", params.getUserName());
@@ -87,10 +83,10 @@ public class DbManager {
 			list = query.getResultList();
 			Iterator<Record> it = list.iterator();
 
-			while (it.hasNext()) {
-				record = it.next();
-				System.out.println(record);
-			}
+//			while (it.hasNext()) {
+//				record = it.next();
+//				System.out.println(record);
+//			}
 
 		} catch (HibernateException ex) {
 			System.out.println(ex.getMessage());
