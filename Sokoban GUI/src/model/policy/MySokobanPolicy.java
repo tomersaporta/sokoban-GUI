@@ -58,4 +58,5 @@ public class MySokobanPolicy extends GeneralSokobanPolicy {
 	
 	}
 
+	
 }

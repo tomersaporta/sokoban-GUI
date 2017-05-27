@@ -139,7 +139,6 @@ public class RecordsWindowController extends Observable implements Initializable
 	}
 
 	public void search(){
-		System.out.println(this.currentLevelID);
 		/*if(this.currentLevelID!=null){
 			this.levelParam=this.currentLevelID;
 		}*/

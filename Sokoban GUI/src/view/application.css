@@ -7,7 +7,8 @@
 
 .header
 {
-	-fx-background-image: url("../../resources/elements/bbb.jpg");
+	-fx-background-color:  #01A9DB;
+	/*-fx-background-image: url("../../resources/elements/bbb.jpg");*/
 	-fx-background-size: 160.0% 
 }
 .records
